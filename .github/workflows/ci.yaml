@@ -25,6 +25,6 @@ jobs:
     - name: Install modules
       run: npm install 
     - name: Run fix Prettier
-      run: npm fix
+      run: npm run fix
     - name: Run tests and get test coverage
       run: npm test
