@@ -1,9 +1,15 @@
 { 
     "name": "group-1-save-thinking",
     "scripts": {
-        "test": "jest"
+        "ci:test": "run-s test send:coverage",
+        "fix": "run-p fix:*",
+        "fix:prettier": "npm run lint:prettier -- --write",
+        "test": "jest",
+        "send:coverage": "npx codecov"
     },
     "devDependencies": {
-        "jest": "^29.2.1"
+        "jest": "^29.2.1",
+        "prettier": "2.7.1",
+        "npm-run-all": "4.1.5"
     }
 }
