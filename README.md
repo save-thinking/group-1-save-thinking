@@ -122,12 +122,57 @@ This is an example of how to list things you need to use the software and how to
    ```
 2. Install NPM packages
    ```sh
-   npm install --save-dev jest
+   npm install
    ```
 3. To run the test suite:
   ```sh
   npm test
   ```
+
+### Developer's Guide (can be move to a new HowTo.md file)
+
+Starting work on the project:
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/save-thinking/group-1-save-thinking.git 
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+Before every push do the following:
+
+1. To fix all the code formatting on your end:
+  ```sh
+  npm run fix
+  ```
+2. To check lint issues:
+  ```sh
+  npm run lint
+  ```
+3. To run the test suite and check code coverage:
+  ```sh
+  npm test
+  ```
+
+Format for GitHub pushes and pull requests:
+
+1. Never push to main
+2. Create a new branch called 
+  a. Feature/name_of_feature
+  b. Bug/name_of_bug
+3. Push changes to your branch
+4. Create a new Pull request:
+  a. Ensure that all changes made are listed 
+  b. Add screenshots showing that the new changes work
+
+
+After every push:
+
+1. Check the build workflow in the actions tab in GitHub
+2. Check if there are any linter issues
+3. Check if all tests have passed
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
