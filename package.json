@@ -1,0 +1,9 @@
+{ 
+    "name": "group-1-save-thinking",
+    "scripts": {
+        "test": "jest"
+    },
+    "devDependencies": {
+        "jest": "^29.2.1"
+    }
+}
