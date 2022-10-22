@@ -2,7 +2,7 @@ name: CI
 on: push
 jobs:
   build:
-    runs-on: ubuntu-latests
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       - name: Cache node modules
