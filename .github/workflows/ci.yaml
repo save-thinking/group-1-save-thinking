@@ -27,4 +27,4 @@ jobs:
     - name: Run fix Prettier
       run: npm fix
     - name: Run tests and get test coverage
-      run: npm ci:test
+      run: npm test
