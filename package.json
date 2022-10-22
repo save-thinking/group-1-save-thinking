@@ -1,4 +1,4 @@
-{ 
+{
     "name": "group-1-save-thinking",
     "scripts": {
         "fix": "run-p fix:*",
@@ -6,8 +6,9 @@
         "test": "jest"
     },
     "devDependencies": {
+        "eslint": "^8.26.0",
         "jest": "^29.2.1",
-        "prettier": "2.7.1",
-        "npm-run-all": "4.1.5"
+        "npm-run-all": "4.1.5",
+        "prettier": "2.7.1"
     }
 }
