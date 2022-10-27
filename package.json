@@ -5,6 +5,7 @@
 		"test": "jest --config config/jest.config.js",
 		"lint": "npx eslint src/js",
 		"fix:lint": "npx eslint --fix src/js",
+		"dev": "npx tailwindcss -c ./config/tailwind.config.js -i ./src/static/css/input.css -o ./src/static/css/output.css --watch",
 		"css": "npx tailwindcss -c ./config/tailwind.config.js -i ./src/static/css/input.css -o ./src/static/css/output.css"
 	},
 	"devDependencies": {
