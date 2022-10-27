@@ -2,9 +2,9 @@
 	"name": "group-1-save-thinking",
 	"scripts": {
 		"fix": "run-p fix:*",
-		"test": "jest",
-		"lint": "npx eslint .",
-		"fix:lint": "npx eslint --fix ."
+		"test": "jest --config config/jest.config.js",
+		"lint": "npx eslint src/js",
+		"fix:lint": "npx eslint --fix src/js"
 	},
 	"devDependencies": {
 		"eslint": "^8.26.0",
