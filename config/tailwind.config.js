@@ -3,6 +3,9 @@ module.exports = {
   relative: true,
   content: ["./src/**/*.{html,js}"],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {},
   },
   plugins: [],
