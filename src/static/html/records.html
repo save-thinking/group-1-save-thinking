@@ -33,14 +33,8 @@
           >Records</a
         >
       </div>
-      <div class="flex space-x-2">
-        <a
-          id="add-record"
-          href="#"
-          class="bg-white hover:bg-red-300 hover:text-base text-white px-3 py-2 rounded-md text-sm font-medium nav-active"
-          aria-current="page"
-          >+</a
-        >
+      <div id="add-record" class="flex space-x-2 bg-white hover:bg-red-300 hover:text-base text-white px-3 py-2 rounded-md text-sm font-medium nav-active">
+        +
       </div>
     </div>
     <div
@@ -48,14 +42,8 @@
     >
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-xl font-bold leading-none text-gray-900">Records</h3>
-        <div class="flex space-x-2">
-          <a
-            id="add-record"
-            href="#"
-            class="bg-red-600 hover:bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium"
-            aria-current="page"
-            >Add Record</a
-          >
+        <div id="add-record-btn" class="flex space-x-2 bg-red-600 hover:bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium"">
+          Add Record
         </div>
       </div>
       <div class="flow-root">
@@ -127,6 +115,7 @@
       </div>
     </div>
     <div
+      id="add-record-modal"
       class="z-10 hidden"
       aria-labelledby="modal-title"
       role="dialog"
@@ -156,17 +145,18 @@
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <form class="w-full max-w-xl mt-2">
+                  <form id="add-record-form"class="w-full max-w-xl mt-2">
                     <div class="flex flex-wrap -mx-3 mb-6">
                       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-record-type"
+                          for="record_type"
                         >
                           Record Type
                         </label>
                         <div class="relative">
                           <select
+                            name="record_type"
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-record-type"
                           >
@@ -194,12 +184,13 @@
                       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-source-account"
+                          for="record_source_account"
                         >
                           Source
                         </label>
                         <div class="relative">
                           <select
+                            name="record_source_account"
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-source-account"
                           >
@@ -229,12 +220,13 @@
                       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-destination-account"
+                          for="record_destination_account"
                         >
                           Destination
                         </label>
                         <div class="relative">
                           <select
+                            name="record_destination_account"
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-destination-account"
                           >
@@ -265,11 +257,12 @@
                       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-amount"
+                          for="record_amount"
                         >
                           Amount
                         </label>
                         <input
+                          name="record_amount"
                           class="appearance-none w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="grid-amount"
                           type="number"
@@ -284,12 +277,13 @@
                       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-currency"
+                          for="currency"
                         >
                           Currency
                         </label>
                         <div class="relative">
                           <select
+                            name="currency"
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-currency"
                           >
@@ -320,11 +314,12 @@
                       <div class="w-full px-3">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-password"
+                          for="record_note"
                         >
                           Note
                         </label>
                         <input
+                          name="record_note"
                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="grid-note"
                           type="text"
@@ -339,52 +334,22 @@
                       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-created-time"
+                          for="record_created_time"
                         >
                           Date
                         </label>
                         <input
+                          name="record_created_time"
                           class="inline-block appearance-none w-full block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="grid-created-time"
                           type="date"
                           value="2018-07-22"
                         />
                       </div>
-                      <!-- <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label
-                          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-state"
-                        >
-                          State
-                        </label>
-                        <div class="relative">
-                          <select
-                            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-state"
-                          >
-                            <option>New Mexico</option>
-                            <option>Missouri</option>
-                            <option>Texas</option>
-                          </select>
-                          <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                          >
-                            <svg
-                              class="fill-current h-4 w-4"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                      </div> -->
                       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-tag"
+                          for="record_tag"
                         >
                           Tag
                         </label>
@@ -392,6 +357,7 @@
                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="grid-tag"
                           type="text"
+                          name="record_tag"
                           placeholder="None"
                         />
                       </div>
@@ -404,12 +370,14 @@
               class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
             >
               <button
+                id="record-modal-add-btn"
                 type="button"
                 class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 Add Record
               </button>
               <button
+                id="record-modal-cancel-btn"
                 type="button"
                 class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >
@@ -420,5 +388,6 @@
         </div>
       </div>
     </div>
+    <script src="../../js/view/records.js"></script>
   </body>
 </html>
