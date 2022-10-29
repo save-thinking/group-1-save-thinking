@@ -11,6 +11,9 @@ const recordModalCancelBtn = document.querySelector('#record-modal-cancel-btn')
 const recordModalAddBtn = document.querySelector('#record-modal-add-btn')
 const recordModalForm = document.querySelector('#add-record-form')
 
+
+
+
 /* Utilities */
 const toggleAddAccountModalVisibility = () => {
   addAccountModal.classList.toggle('hidden')
@@ -37,6 +40,7 @@ accountModalAddButton.onclick = (e) => {
   for (const pair of formData.entries()) {
     formJson[pair[0]] = pair[1]
   }
+  console.log(formJson)
   alert(JSON.stringify(formJson))
   toggleAddAccountModalVisibility()
 }
@@ -50,7 +54,9 @@ recordModalAddBtn.onclick = (e) => {
   for (const pair of formData.entries()) {
     formJson[pair[0]] = pair[1]
   }
+  console.log(formJson)
   alert(JSON.stringify(formJson))
+
   toggleAddRecordModalVisibility()
 }
 

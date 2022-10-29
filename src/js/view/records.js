@@ -8,6 +8,19 @@ const toggleAddRecordModalVisibility = () => {
   addRecordModal.classList.toggle('hidden')
 }
 
+const recordsPlaceholder = document.querySelector('#record-list');
+
+const testRecordData = [{
+  "record_type": "Expense",
+  "record_source_account": "BofA Account",
+  "record_destination_account": "BofA Account",
+  "record_amount": "123",
+  "currency": "USD",
+  "record_note": "1000",
+  "record_created_time": "2018-07-22",
+  "record_tag": "1"
+}]
+
 addRecordButton.onclick = (e) => {
   toggleAddRecordModalVisibility()
 }
@@ -32,3 +45,36 @@ document.onkeyup = (e) => {
     toggleAddRecordModalVisibility()
   }
 }
+
+function createListWithInnerHTML(records) {
+  const rows = records.map(record => {
+    return `<li class="py-3 sm:py-4">
+    <div class="flex items-center space-x-4">
+      <div class="flex">
+        <div class="text-2xl rounded-full">🍕</div>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-900 truncate">${record.record_type}</p>
+        <p class="text-sm text-gray-500 truncate">${record.record_created_time}</p>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-900 truncate">
+          ${record.record_note}
+        </p>
+        <p class="text-sm text-gray-500 truncate">${record.record_source_account}</p>
+      </div>
+      <div class="inline-flex items-center text-base text-red-600">
+      ${record.record_amount}
+      </div>
+    </div>
+  </li>`;
+  });
+  const html = `<ul>${rows.join()}</ul>`;
+  console.log(html)
+  recordsPlaceholder.innerHTML = html;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  
+  createListWithInnerHTML(testRecordData)
+});
