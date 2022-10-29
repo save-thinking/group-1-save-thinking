@@ -10,6 +10,7 @@ const toggleAddRecordModalVisibility = () => {
 
 const recordsPlaceholder = document.querySelector('#record-list');
 
+// the dummy record 
 const testRecordData = [{
   "record_type": "Expense",
   "record_source_account": "BofA Account",
@@ -20,6 +21,11 @@ const testRecordData = [{
   "record_created_time": "2018-07-22",
   "record_tag": "1"
 }]
+
+// this function would be called every time the page is loaded
+document.addEventListener("DOMContentLoaded", function() {
+  createListWithInnerHTML(testRecordData)
+});
 
 addRecordButton.onclick = (e) => {
   toggleAddRecordModalVisibility()
@@ -47,6 +53,7 @@ document.onkeyup = (e) => {
 }
 
 function createListWithInnerHTML(records) {
+  // gereate the list of records HTML
   const rows = records.map(record => {
     return `<li class="py-3 sm:py-4">
     <div class="flex items-center space-x-4">
@@ -70,11 +77,11 @@ function createListWithInnerHTML(records) {
   </li>`;
   });
   const html = `<ul>${rows.join()}</ul>`;
+
+
   console.log(html)
+
+  // put the HTML into the web page
   recordsPlaceholder.innerHTML = html;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  
-  createListWithInnerHTML(testRecordData)
-});
