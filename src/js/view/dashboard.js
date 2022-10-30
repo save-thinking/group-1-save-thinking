@@ -11,9 +11,6 @@ const recordModalCancelBtn = document.querySelector('#record-modal-cancel-btn')
 const recordModalAddBtn = document.querySelector('#record-modal-add-btn')
 const recordModalForm = document.querySelector('#add-record-form')
 
-
-
-
 /* Utilities */
 const toggleAddAccountModalVisibility = () => {
   addAccountModal.classList.toggle('hidden')
