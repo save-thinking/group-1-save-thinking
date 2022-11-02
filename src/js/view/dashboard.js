@@ -16,19 +16,19 @@ const testDashboardData = [{
   account_name: 'Bank of America',
   account_type: 'checking-account',
   initial_balance: 4200,
-  currency: 'USD',
+  currency: 'USD'
 },
 {
   account_name: 'Citibank',
   account_type: 'credit-card',
   initial_balance: -1200,
-  currency: 'USD',
+  currency: 'USD'
 },
 {
   account_name: 'Wallet',
   account_type: 'cash',
   initial_balance: 22.6,
-  currency: 'USD',
+  currency: 'USD'
 }]
 
 // this function would be called every time the page is loaded
@@ -91,7 +91,7 @@ document.onkeyup = (e) => {
 
 const createDashboardWithInnerHTML = (accounts) => {
   // generate HTML for dashboard accounts
-  const accountsHtml= accounts.map(account => {  
+  const accountsHtml = accounts.map(account => {
     return `
     <li class="p-4">
       <div
@@ -118,33 +118,29 @@ const createDashboardWithInnerHTML = (accounts) => {
     `
   })
   console.log(Array.from(accountsHtml.values()))
-  const html = Array.from(accountsHtml.values()).join('') 
+  const html = Array.from(accountsHtml.values()).join('')
   console.log(html)
   accountList.innerHTML = html
 }
 
 // helper function to return sign of account
 const getBalanceColor = (balance) => {
-  if(balance<0) { return 'red' }
-  else { return 'green' }
-
+  if (balance < 0) { return 'red' } else { return 'green' }
 }
 
 // helper function to return currency with balance as string
 const getBalanceWithCurrency = (balance, currency) => {
-    const currencySign = getCurrencySign(currency)
-    if (balance<0) {
-      return '-' + currencySign + Math.abs(balance).toString()
-    } else {
-      return currencySign + balance.toString()
-    }
+  const currencySign = getCurrencySign(currency)
+  if (balance < 0) {
+    return '-' + currencySign + Math.abs(balance).toString()
+  } else {
+    return currencySign + balance.toString()
+  }
 }
-
-
 
 // helper function to return sign of account
 const getAccountTypeSign = (accountTypeString) => {
-  switch(accountTypeString) {
+  switch (accountTypeString) {
     case 'checking-account': return '🏦'
     case 'savings-account': return '🏥'
     case 'cash': return '💸'
@@ -155,7 +151,7 @@ const getAccountTypeSign = (accountTypeString) => {
 
 // helper function to return account type name to be displayed
 const getAccountType = (accountTypeString) => {
-  switch(accountTypeString) {
+  switch (accountTypeString) {
     case 'checking-account': return 'Checking Account'
     case 'savings-account': return 'Savings Account'
     case 'cash': return 'Cash'
@@ -173,4 +169,3 @@ const getCurrencySign = (currencyString) => {
     default: return ''
   }
 }
-
