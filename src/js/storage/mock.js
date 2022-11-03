@@ -1,15 +1,6 @@
+import { uuidv4 } from './utils.js'
 const RECORDS = {}
 const ACCOUNTS = {}
-
-// https://stackoverflow.com/questions/105034/how-do-i-create-a-guid-uuid
-function uuidv4 () {
-  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
-    (
-      c ^
-      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-    ).toString(16)
-  )
-}
 
 export class StorageError extends Error {
   constructor (message) {
@@ -45,7 +36,7 @@ export function getAllRecords () {
 
 export function storeAccount (account) {
   account.id = uuidv4()
-  ACCOUNTS.push(account)
+  ACCOUNTS[account.id] = account
   return account
 }
 
