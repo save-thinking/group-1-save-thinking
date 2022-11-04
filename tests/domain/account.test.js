@@ -1,6 +1,9 @@
-import * from 'src/js/services/domain/account.js';
-import * from 'src/js/services/domain/exceptions.js'; 
-
+import { processNewAccount } from "src/js/services/domain/account.js";
+import {
+  InvalidAmountError,
+  ValidationError,
+  StorageError,
+} from "src/js/services/domain/exceptions.js";
 
 /* 
 Testing:
@@ -31,55 +34,79 @@ const badPassedInfo = {"account_name":"Sample Account Name","account_type":"chec
 const badPassedInfo = {"account_name":"Sample Account Name","account_type":"checking-account","initial_balance":"11234.234243","currency":"USD"}
 */
 
-function testValidateNewAccount () {
-  const g_1 = {"account_name":"Sample Account Name","account_type":"checking-account","initial_balance":"12345","currency":"USD"}
-  const g_2 = {"account_name":"Sample Account Name","account_type":"checking-account","initial_balance":"12345.67","currency":"USD"}
-  const g_3 = {"account_name":"Sample Account Name","account_type":"checking-account","initial_balance":"0","currency":"USD"}
-  
-  const b_1 = {"account_name":"","account_type":"checking-account","initial_balance":"0","currency":"USD"}
-  const b_2 = {"account_name":"Sample Account Name","account_type":"checking-account","initial_balance":"","currency":"USD"}
-  const b_3 = {"account_name":"Sample Account Name","account_type":"checking-account","initial_balance":"-1","currency":"USD"}
-  const b_4 = {"account_name":"Sample Account Name","account_type":"checking-account","initial_balance":"11234.234243","currency":"USD"}
-  
-  
+function testValidateNewAccount() {
+  const g_1 = {
+    account_name: "Sample Account Name",
+    account_type: "checking-account",
+    initial_balance: "12345",
+    currency: "USD",
+  };
+  const g_2 = {
+    account_name: "Sample Account Name",
+    account_type: "checking-account",
+    initial_balance: "12345.67",
+    currency: "USD",
+  };
+  const g_3 = {
+    account_name: "Sample Account Name",
+    account_type: "checking-account",
+    initial_balance: "0",
+    currency: "USD",
+  };
+
+  const b_1 = {
+    account_name: "",
+    account_type: "checking-account",
+    initial_balance: "0",
+    currency: "USD",
+  };
+  const b_2 = {
+    account_name: "Sample Account Name",
+    account_type: "checking-account",
+    initial_balance: "",
+    currency: "USD",
+  };
+  const b_3 = {
+    account_name: "Sample Account Name",
+    account_type: "checking-account",
+    initial_balance: "-1",
+    currency: "USD",
+  };
+  const b_4 = {
+    account_name: "Sample Account Name",
+    account_type: "checking-account",
+    initial_balance: "11234.234243",
+    currency: "USD",
+  };
+
   // Check all good inputs should work. If we throw as error then we fail.
   try {
     validateNewAccount(g_1);
     validateNewAccount(g_2);
     validateNewAccount(g_3);
+  } catch (error) {
+    return "fail";
   }
-  catch (error) {
-    return 'fail';
-  }
-  
-  // Check that all of the bad inputs throw errors. If any do not throw errors, then we will fail. 
+
+  // Check that all of the bad inputs throw errors. If any do not throw errors, then we will fail.
   try {
     validateNewAccount(b_1);
-    return 'fail';
-  }
-  catch (error) {
-  }
+    return "fail";
+  } catch (error) {}
 
   try {
     validateNewAccount(b_2);
-    return 'fail';
-  }
-  catch (error) { 
-  }
+    return "fail";
+  } catch (error) {}
 
   try {
     validateNewAccount(b_3);
-    return 'fail';
-  }
-  catch (error) { 
-  }
+    return "fail";
+  } catch (error) {}
 
   try {
     validateNewAccount(b_4);
-    return 'fail';
-  }
-  catch (error) { 
-  }
-  return 'pass';
+    return "fail";
+  } catch (error) {}
+  return "pass";
 }
-

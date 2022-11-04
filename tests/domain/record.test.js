@@ -1,6 +1,9 @@
-import * from 'src/js/services/domain/record.js';
-import * from 'src/js/services/domain/exceptions.js'; 
-
+import { processNewRecord } from "src/js/services/domain/record.js";
+import {
+  InvalidAmountError,
+  ValidationError,
+  StorageError,
+} from "src/js/services/domain/exceptions.js";
 
 /* 
 Testing:
@@ -31,60 +34,111 @@ const badPassedInfo = {"record_type":"Expense","record_source_account":"BofA Acc
 const badPassedInfo = {"record_type":"Expense","record_source_account":"BofA Account","record_destination_account":"BofA Account","record_amount":"123.4567","currency":"USD","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}
 */
 
-function testValidateNewRecord () {
-  const g_1 = {"record_type":"Expense","record_source_account":"BofA Account","record_destination_account":"BofA Account","record_amount":"123456","currency":"USD","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}  
-  const g_2 = {"record_type":"Expense","record_source_account":"BofA Account","record_destination_account":"BofA Account","record_amount":"123456.78","currency":"USD","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}
+function testValidateNewRecord() {
+  const g_1 = {
+    record_type: "Expense",
+    record_source_account: "BofA Account",
+    record_destination_account: "BofA Account",
+    record_amount: "123456",
+    currency: "USD",
+    record_note: "Sample Note.",
+    record_created_time: "2018-07-22",
+    record_tag: "Sample Tag",
+  };
+  const g_2 = {
+    record_type: "Expense",
+    record_source_account: "BofA Account",
+    record_destination_account: "BofA Account",
+    record_amount: "123456.78",
+    currency: "USD",
+    record_note: "Sample Note.",
+    record_created_time: "2018-07-22",
+    record_tag: "Sample Tag",
+  };
 
-  const b_1 = {"record_type":"Expense","record_source_account":"BofA Account","record_destination_account":"BofA Account","record_amount":"0","currency":"USD","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}
-  const b_2 = {"record_type":"Expense","record_source_account":"BofA Account","record_destination_account":"BofA Account","record_amount":"","currency":"USD","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}
-  const b_3 = {"record_type":"Expense","record_source_account":"BofA Account","record_destination_account":"BofA Account","record_amount":"-1","currency":"USD","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}
-  const b_4 = {"record_type":"Expense","record_source_account":"BofA Account","record_destination_account":"BofA Account","record_amount":"1.1.1","currency":"USD","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}
-  const b_5 = {"record_type":"Expense","record_source_account":"BofA Account","record_destination_account":"BofA Account","record_amount":"123.4567","currency":"USD","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}
+  const b_1 = {
+    record_type: "Expense",
+    record_source_account: "BofA Account",
+    record_destination_account: "BofA Account",
+    record_amount: "0",
+    currency: "USD",
+    record_note: "Sample Note.",
+    record_created_time: "2018-07-22",
+    record_tag: "Sample Tag",
+  };
+  const b_2 = {
+    record_type: "Expense",
+    record_source_account: "BofA Account",
+    record_destination_account: "BofA Account",
+    record_amount: "",
+    currency: "USD",
+    record_note: "Sample Note.",
+    record_created_time: "2018-07-22",
+    record_tag: "Sample Tag",
+  };
+  const b_3 = {
+    record_type: "Expense",
+    record_source_account: "BofA Account",
+    record_destination_account: "BofA Account",
+    record_amount: "-1",
+    currency: "USD",
+    record_note: "Sample Note.",
+    record_created_time: "2018-07-22",
+    record_tag: "Sample Tag",
+  };
+  const b_4 = {
+    record_type: "Expense",
+    record_source_account: "BofA Account",
+    record_destination_account: "BofA Account",
+    record_amount: "1.1.1",
+    currency: "USD",
+    record_note: "Sample Note.",
+    record_created_time: "2018-07-22",
+    record_tag: "Sample Tag",
+  };
+  const b_5 = {
+    record_type: "Expense",
+    record_source_account: "BofA Account",
+    record_destination_account: "BofA Account",
+    record_amount: "123.4567",
+    currency: "USD",
+    record_note: "Sample Note.",
+    record_created_time: "2018-07-22",
+    record_tag: "Sample Tag",
+  };
 
-  
   // Check all good inputs should work. If we throw as error then we fail.
   try {
     validateNewRecord(g_1);
     validateNewRecord(g_2);
+  } catch (error) {
+    return "fail";
   }
-  catch (error) {
-    return 'fail';
-  }
-  
-  // Check that all of the bad inputs throw errors. If any do not throw errors, then we will fail. 
+
+  // Check that all of the bad inputs throw errors. If any do not throw errors, then we will fail.
   try {
     validateNewRecord(b_1);
-    return 'fail';
-  }
-  catch (error) {
-  }
+    return "fail";
+  } catch (error) {}
 
   try {
     validateNewRecord(b_2);
-    return 'fail';
-  }
-  catch (error) { 
-  }
+    return "fail";
+  } catch (error) {}
 
   try {
     validateNewRecord(b_3);
-    return 'fail';
-  }
-  catch (error) { 
-  }
+    return "fail";
+  } catch (error) {}
 
   try {
     validateNewRecord(b_4);
-    return 'fail';
-  }
-  catch (error) { 
-  }
-  
+    return "fail";
+  } catch (error) {}
+
   try {
     validateNewRecord(b_5);
-    return 'fail';
-  }
-  catch (error) { 
-  }
-  return 'pass';
+    return "fail";
+  } catch (error) {}
+  return "pass";
 }
