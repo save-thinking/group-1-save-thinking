@@ -128,6 +128,8 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm test
    ```
+4. To run the dashboard.html/record.html file: Install the live server extension on VSCode and click on go live in the bottom blue bar
+
 
 ### Developer's Guide (can be moved to a new HowTo.md file)
 
