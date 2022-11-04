@@ -1,3 +1,5 @@
+import * as util from './utility.js';
+
 const navBarQuickAdd = document.querySelector('#add-record')
 const addAccountModal = document.querySelector('#add-account-modal')
 const addAccountButton = document.querySelector('#add-account-btn')
@@ -91,71 +93,6 @@ const addAccountCard = (account) => {
   accountList.prepend(accountCardComponent(account))
 }
 
-// helper function to return sign of account
-const getBalanceColor = (balance) => {
-  if (balance < 0) {
-    return 'red'
-  } else {
-    return 'green'
-  }
-}
-
-// helper function to return currency with balance as string
-const getBalanceWithCurrency = (balance, currency) => {
-  const currencySign = getCurrencySign(currency)
-  if (balance < 0) {
-    return '-' + currencySign + Math.abs(balance).toString()
-  } else {
-    return currencySign + balance.toString()
-  }
-}
-
-// helper function to return sign of account
-const getAccountTypeSign = (accountTypeString) => {
-  switch (accountTypeString) {
-    case 'checking-account':
-      return '🏦'
-    case 'savings-account':
-      return '🏥'
-    case 'cash':
-      return '💸'
-    case 'credit-card':
-      return '💳'
-    default:
-      return ''
-  }
-}
-
-// helper function to return account type name to be displayed
-const getAccountType = (accountTypeString) => {
-  switch (accountTypeString) {
-    case 'checking-account':
-      return 'Checking Account'
-    case 'savings-account':
-      return 'Savings Account'
-    case 'cash':
-      return 'Cash'
-    case 'credit-card':
-      return 'Credit Card'
-    default:
-      return ''
-  }
-}
-
-// helper function to return sign of currency
-const getCurrencySign = (currencyString) => {
-  switch (currencyString) {
-    case 'USD':
-      return '$'
-    case 'INR':
-      return '₹'
-    case 'EUR':
-      return '€'
-    default:
-      return ''
-  }
-}
-
 const accountCardComponent = (account) => {
   const accountCard = document.createElement('div')
   accountCard.classList =
@@ -163,7 +100,7 @@ const accountCardComponent = (account) => {
   accountCard.innerHTML = `<div class='sm:py-4'>
   <div class='flex items-center space-x-4'>
     <div class='flex'>
-      <div class='text-2xl rounded-full'>${getAccountTypeSign(
+      <div class='text-2xl rounded-full'>${util.getAccountTypeSign(
         account.account_type
       )}</div>
     </div>
@@ -171,14 +108,14 @@ const accountCardComponent = (account) => {
       <p class='text-sm font-medium text-gray-900 truncate'>
       ${account.account_name}
       </p>
-      <p class='text-xs text-gray-500 truncate'>${getAccountType(
+      <p class='text-xs text-gray-500 truncate'>${util.getAccountType(
         account.account_type
       )}</p>
     </div>
-    <div class='inline-flex items-center text-base text-${getBalanceColor(
+    <div class='inline-flex items-center text-base text-${util.getBalanceColor(
       account.initial_balance
     )}-600'>
-    ${getBalanceWithCurrency(account.initial_balance, account.currency)}
+    ${util.getBalanceWithCurrency(account.initial_balance, account.currency)}
     </div>
   </div>
 </div>`
