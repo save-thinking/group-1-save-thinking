@@ -12,28 +12,30 @@ const recordModalAddBtn = document.querySelector('#record-modal-add-btn')
 const recordModalForm = document.querySelector('#add-record-form')
 const accountList = document.querySelector('#account-list')
 
-const testDashboardData = [{
-  account_name: 'Bank of America',
-  account_type: 'checking-account',
-  initial_balance: 4200,
-  currency: 'USD'
-},
-{
-  account_name: 'Citibank',
-  account_type: 'credit-card',
-  initial_balance: -1200,
-  currency: 'USD'
-},
-{
-  account_name: 'Wallet',
-  account_type: 'cash',
-  initial_balance: 22.6,
-  currency: 'USD'
-}]
+const testDashboardData = [
+  {
+    account_name: 'Bank of America',
+    account_type: 'checking-account',
+    initial_balance: 4200,
+    currency: 'USD'
+  },
+  {
+    account_name: 'Citibank',
+    account_type: 'credit-card',
+    initial_balance: -1200,
+    currency: 'USD'
+  },
+  {
+    account_name: 'Wallet',
+    account_type: 'cash',
+    initial_balance: 22.6,
+    currency: 'USD'
+  }
+]
 
 // this function would be called every time the page is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  createDashboardWithInnerHTML(testDashboardData)
+  testDashboardData.map((account) => addAccountCard(account))
 })
 
 /* Utilities */
@@ -62,10 +64,8 @@ accountModalAddButton.onclick = (e) => {
   for (const pair of formData.entries()) {
     formJson[pair[0]] = pair[1]
   }
-  // console.log(formJson)
-  // alert(JSON.stringify(formJson))
   testDashboardData.push(formJson)
-  createDashboardWithInnerHTML(testDashboardData)
+  addAccountCard(formJson)
   toggleAddAccountModalVisibility()
 }
 
@@ -78,8 +78,6 @@ recordModalAddBtn.onclick = (e) => {
   for (const pair of formData.entries()) {
     formJson[pair[0]] = pair[1]
   }
-  // console.log(formJson)
-  // alert(JSON.stringify(formJson))
   toggleAddRecordModalVisibility()
 }
 
@@ -89,43 +87,17 @@ document.onkeyup = (e) => {
   }
 }
 
-const createDashboardWithInnerHTML = (accounts) => {
-  // generate HTML for dashboard accounts
-  const accountsHtml = accounts.map(account => {
-    return `
-    <li class="p-4">
-      <div
-      class="container p-4 m-2 h-full items-stretch max-w-xs bg-white rounded-lg border shadow-md sm:p-8 hover:bg-slate-50"
-      >
-        <div class="sm:py-4">
-          <div class="flex items-center space-x-4">
-            <div class="flex">
-              <div class="text-2xl rounded-full"> ${getAccountTypeSign(account.account_type)}</div>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">
-                ${account.account_name}
-              </p>
-              <p class="text-xs text-gray-500 truncate">${getAccountType(account.account_type)}</p>
-            </div>
-            <div class="inline-flex items-center text-base text-${getBalanceColor(account.initial_balance)}-600">
-              ${getBalanceWithCurrency(account.initial_balance, account.currency)}
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    `
-  })
-  console.log(Array.from(accountsHtml.values()))
-  const html = Array.from(accountsHtml.values()).join('')
-  console.log(html)
-  accountList.innerHTML = html
+const addAccountCard = (account) => {
+  accountList.prepend(accountCardComponent(account))
 }
 
 // helper function to return sign of account
 const getBalanceColor = (balance) => {
-  if (balance < 0) { return 'red' } else { return 'green' }
+  if (balance < 0) {
+    return 'red'
+  } else {
+    return 'green'
+  }
 }
 
 // helper function to return currency with balance as string
@@ -141,31 +113,74 @@ const getBalanceWithCurrency = (balance, currency) => {
 // helper function to return sign of account
 const getAccountTypeSign = (accountTypeString) => {
   switch (accountTypeString) {
-    case 'checking-account': return '🏦'
-    case 'savings-account': return '🏥'
-    case 'cash': return '💸'
-    case 'credit-card': return '💳'
-    default: return ''
+    case 'checking-account':
+      return '🏦'
+    case 'savings-account':
+      return '🏥'
+    case 'cash':
+      return '💸'
+    case 'credit-card':
+      return '💳'
+    default:
+      return ''
   }
 }
 
 // helper function to return account type name to be displayed
 const getAccountType = (accountTypeString) => {
   switch (accountTypeString) {
-    case 'checking-account': return 'Checking Account'
-    case 'savings-account': return 'Savings Account'
-    case 'cash': return 'Cash'
-    case 'credit-card': return 'Credit Card'
-    default: return ''
+    case 'checking-account':
+      return 'Checking Account'
+    case 'savings-account':
+      return 'Savings Account'
+    case 'cash':
+      return 'Cash'
+    case 'credit-card':
+      return 'Credit Card'
+    default:
+      return ''
   }
 }
 
 // helper function to return sign of currency
 const getCurrencySign = (currencyString) => {
   switch (currencyString) {
-    case 'USD': return '$'
-    case 'INR': return '₹'
-    case 'EUR': return '€'
-    default: return ''
+    case 'USD':
+      return '$'
+    case 'INR':
+      return '₹'
+    case 'EUR':
+      return '€'
+    default:
+      return ''
   }
+}
+
+const accountCardComponent = (account) => {
+  const accountCard = document.createElement('div')
+  accountCard.classList =
+    'container p-4 m-2 h-full items-stretch max-w-xs bg-white rounded-lg border shadow-md sm:p-8 hover:bg-slate-50'
+  accountCard.innerHTML = `<div class='sm:py-4'>
+  <div class='flex items-center space-x-4'>
+    <div class='flex'>
+      <div class='text-2xl rounded-full'>${getAccountTypeSign(
+        account.account_type
+      )}</div>
+    </div>
+    <div class='flex-1 min-w-0'>
+      <p class='text-sm font-medium text-gray-900 truncate'>
+      ${account.account_name}
+      </p>
+      <p class='text-xs text-gray-500 truncate'>${getAccountType(
+        account.account_type
+      )}</p>
+    </div>
+    <div class='inline-flex items-center text-base text-${getBalanceColor(
+      account.initial_balance
+    )}-600'>
+    ${getBalanceWithCurrency(account.initial_balance, account.currency)}
+    </div>
+  </div>
+</div>`
+  return accountCard
 }
