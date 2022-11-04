@@ -1,4 +1,4 @@
-import * as util from './utility.js';
+import * as util from './utility.js'
 
 const navBarQuickAdd = document.querySelector('#add-record')
 const addAccountModal = document.querySelector('#add-account-modal')

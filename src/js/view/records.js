@@ -93,4 +93,3 @@ const recordCardComponent = (record) => {
 </div>`
   return recordCard
 }
-
