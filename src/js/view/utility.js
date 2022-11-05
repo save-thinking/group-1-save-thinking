@@ -62,3 +62,18 @@ export function getCurrencySign (currencyString) {
       return ''
   }
 }
+
+// wrapper function to check if the element exist before addEventListener
+export function addEventListener (element, eventListenerType, f) {
+  if (element !== undefined && element !== null) {
+    element.addEventListener(eventListenerType, (e) => {
+      console.log('eventListenerMiddleWare')
+      f(e)
+    })
+  }
+}
+
+// onLoad function would be called every time the page is loaded
+export function onLoad (f) {
+  document.addEventListener('DOMContentLoaded', f)
+}

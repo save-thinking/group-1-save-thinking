@@ -35,11 +35,6 @@ const testDashboardData = [
   }
 ]
 
-// this function would be called every time the page is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  testDashboardData.map((account) => addAccountCard(account))
-})
-
 /* Utilities */
 const toggleAddAccountModalVisibility = () => {
   addAccountModal.classList.toggle('hidden')
@@ -48,19 +43,10 @@ const toggleAddRecordModalVisibility = () => {
   addRecordModal.classList.toggle('hidden')
 }
 
-/* Event Listeners */
-addAccountButton.onclick = (e) => {
-  toggleAddAccountModalVisibility()
-}
-
-accountModalCancelButton.onclick = (e) => {
-  toggleAddAccountModalVisibility()
-}
-navBarQuickAdd.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
-
-accountModalAddButton.onclick = (e) => {
+util.addEventListener(addAccountButton, 'click', toggleAddAccountModalVisibility)
+util.addEventListener(accountModalCancelButton, 'click', toggleAddAccountModalVisibility)
+util.addEventListener(navBarQuickAdd, 'click', toggleAddAccountModalVisibility)
+util.addEventListener(accountModalAddButton, 'click', (e) => {
   const formData = new FormData(accountModalAddForm)
   const formJson = {}
   for (const pair of formData.entries()) {
@@ -69,19 +55,64 @@ accountModalAddButton.onclick = (e) => {
   testDashboardData.push(formJson)
   addAccountCard(formJson)
   toggleAddAccountModalVisibility()
-}
-
-recordModalCancelBtn.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
-recordModalAddBtn.onclick = (e) => {
+})
+util.addEventListener(recordModalCancelBtn, 'click', toggleAddAccountModalVisibility)
+util.addEventListener(recordModalAddBtn, 'click', (e) => {
   const formData = new FormData(recordModalForm)
   const formJson = {}
   for (const pair of formData.entries()) {
     formJson[pair[0]] = pair[1]
   }
   toggleAddRecordModalVisibility()
-}
+})
+util.addEventListener(navBarQuickAdd, 'click', toggleAddAccountModalVisibility)
+// if (addAccountButton !== null) {
+//   /* Event Listeners */
+//   addAccountButton.onclick = (e) => {
+//     toggleAddAccountModalVisibility()
+//   }
+// }
+
+// if (accountModalCancelButton !== null) {
+//   accountModalCancelButton.onclick = (e) => {
+//     toggleAddAccountModalVisibility()
+//   }
+// }
+
+// if (navBarQuickAdd !== null) {
+//   navBarQuickAdd.onclick = (e) => {
+//     toggleAddRecordModalVisibility()
+//   }
+// }
+
+// if (accountModalAddButton !== null) {
+//   accountModalAddButton.onclick = (e) => {
+//     const formData = new FormData(accountModalAddForm)
+//     const formJson = {}
+//     for (const pair of formData.entries()) {
+//       formJson[pair[0]] = pair[1]
+//     }
+//     testDashboardData.push(formJson)
+//     addAccountCard(formJson)
+//     toggleAddAccountModalVisibility()
+//   }
+// }
+
+// if (recordModalCancelBtn !== null) {
+//   recordModalCancelBtn.onclick = (e) => {
+//     toggleAddRecordModalVisibility()
+//   }
+// }
+// if (recordModalAddBtn !== null) {
+//   recordModalAddBtn.onclick = (e) => {
+//     const formData = new FormData(recordModalForm)
+//     const formJson = {}
+//     for (const pair of formData.entries()) {
+//       formJson[pair[0]] = pair[1]
+//     }
+//     toggleAddRecordModalVisibility()
+//   }
+// }
 
 document.onkeyup = (e) => {
   if (e.key === 'q' && addRecordModal.classList.contains('hidden')) {
@@ -121,3 +152,11 @@ const accountCardComponent = (account) => {
 </div>`
   return accountCard
 }
+
+// this function would be called every time the page is loaded
+util.onLoad(() => {
+  // if account list is null, it means that we are not loading the dashboard page
+  if (accountList !== null) {
+    testDashboardData.map((account) => addAccountCard(account))
+  }
+})
