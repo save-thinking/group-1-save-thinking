@@ -1,4 +1,5 @@
 import * as util from './utility.js'
+import * as template from './template.js'
 
 const addRecordModal = document.querySelector('#add-record-modal')
 const addRecordButton = document.querySelector('#add-record-btn')
@@ -33,6 +34,8 @@ const testRecordData = [{
   record_created_time: '2018-07-26',
   record_tag: '2'
 }]
+
+recordModalForm.innerHTML = template.recordForm()
 
 // this function would be called every time the page is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -72,24 +75,12 @@ const addRecordCard = (account) => {
 const recordCardComponent = (record) => {
   const recordCard = document.createElement('div')
   recordCard.classList = 'py-3 sm:py-4'
-  recordCard.innerHTML = `
-<div class="flex items-center space-x-4">
-  <div class="flex">
-    <div class="text-2xl rounded-full">🍕</div>
-  </div>
-  <div class="flex-1 min-w-0">
-    <p class="text-sm font-medium text-gray-900 truncate">${record.record_type}</p>
-    <p class="text-sm text-gray-500 truncate">${record.record_created_time}</p>
-  </div>
-  <div class="flex-1 min-w-0">
-    <p class="text-sm font-medium text-gray-900 truncate">
-      ${record.record_note}
-    </p>
-    <p class="text-sm text-gray-500 truncate">${record.record_source_account}</p>
-  </div>
-  <div class="inline-flex items-center text-base text-red-600">
-   ${util.getBalanceWithCurrency(record.record_amount, record.currency)}
-  </div>
-</div>`
+  recordCard.innerHTML = template.recordCard(
+                            record.record_type, // type of record
+                            record.record_created_time, // record time
+                            record.record_note, // record note
+                            record.record_source_account, // record source account
+                            util.getAmountWithCurrency(record.record_amount, record.currency) // balance with currency string
+                          )
   return recordCard
 }
