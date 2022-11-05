@@ -1,4 +1,5 @@
 import * as util from './utility.js'
+import * as template from './template.js'
 
 const navBarQuickAdd = document.querySelector('#add-record')
 const addAccountModal = document.querySelector('#add-account-modal')
@@ -34,6 +35,8 @@ const testDashboardData = [
     currency: 'USD'
   }
 ]
+
+recordModalForm.innerHTML = template.recordForm()
 
 /* Utilities */
 const toggleAddAccountModalVisibility = () => {
@@ -128,28 +131,13 @@ const accountCardComponent = (account) => {
   const accountCard = document.createElement('div')
   accountCard.classList =
     'container p-4 m-2 h-full items-stretch max-w-xs bg-white rounded-lg border shadow-md sm:p-8 hover:bg-slate-50'
-  accountCard.innerHTML = `<div class='sm:py-4'>
-  <div class='flex items-center space-x-4'>
-    <div class='flex'>
-      <div class='text-2xl rounded-full'>${util.getAccountTypeSign(
-        account.account_type
-      )}</div>
-    </div>
-    <div class='flex-1 min-w-0'>
-      <p class='text-sm font-medium text-gray-900 truncate'>
-      ${account.account_name}
-      </p>
-      <p class='text-xs text-gray-500 truncate'>${util.getAccountType(
-        account.account_type
-      )}</p>
-    </div>
-    <div class='inline-flex items-center text-base text-${util.getBalanceColor(
-      account.initial_balance
-    )}-600'>
-    ${util.getBalanceWithCurrency(account.initial_balance, account.currency)}
-    </div>
-  </div>
-</div>`
+  accountCard.innerHTML = template.accountCard(
+                            util.getAccountTypeSign(account.account_type), // account sign
+                            account.account_name, // account name
+                            util.getAccountType(account.account_type), // account type name
+                            util.getBalanceColor(account.initial_balance), // balance color
+                            util.getAmountWithCurrency(account.initial_balance, account.currency) // balance with currency sign
+                          )
   return accountCard
 }
 

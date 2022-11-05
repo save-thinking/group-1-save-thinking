@@ -8,12 +8,12 @@ export function getBalanceColor (balance) {
 }
 
 // helper function to return currency with balance as string
-export function getBalanceWithCurrency (balance, currency) {
+export function getAmountWithCurrency (amount, currency) {
   const currencySign = getCurrencySign(currency)
-  if (balance < 0) {
-    return '-' + currencySign + Math.abs(balance).toString()
+  if (amount < 0) {
+    return '-' + currencySign + Math.abs(amount).toString()
   } else {
-    return currencySign + balance.toString()
+    return currencySign + amount.toString()
   }
 }
 
