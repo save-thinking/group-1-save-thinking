@@ -1,5 +1,5 @@
-export function accountCard(accountTypeSign, accountName, accountType, balanceColor, balanceWithCurrency) {
-    return `<div class='sm:py-4'>
+export function accountCard (accountTypeSign, accountName, accountType, balanceColor, balanceWithCurrency) {
+  return `<div class='sm:py-4'>
     <div class='flex items-center space-x-4'>
       <div class='flex'>
         <div class='text-2xl rounded-full'>${accountTypeSign}</div>
@@ -17,7 +17,7 @@ export function accountCard(accountTypeSign, accountName, accountType, balanceCo
   </div>`
 }
 
-export function recordCard(recordType, recordTime, recordNote, recordSourceAccount, amountWithCurrency) {
+export function recordCard (recordType, recordTime, recordNote, recordSourceAccount, amountWithCurrency) {
   return `<div class="flex items-center space-x-4">
   <div class="flex">
     <div class="text-2xl rounded-full">🍕</div>
@@ -38,8 +38,8 @@ export function recordCard(recordType, recordTime, recordNote, recordSourceAccou
 </div>`
 }
 
-export function addRecordModal() {
-return `      <div
+export function addRecordModal () {
+  return `      <div
 class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
 ></div>
 
@@ -225,10 +225,9 @@ class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
   </div>
 </div>
 </div>`
-
 }
 
-export function recordForm() {
+export function recordForm () {
   return `<div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label

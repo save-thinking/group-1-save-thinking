@@ -132,12 +132,12 @@ const accountCardComponent = (account) => {
   accountCard.classList =
     'container p-4 m-2 h-full items-stretch max-w-xs bg-white rounded-lg border shadow-md sm:p-8 hover:bg-slate-50'
   accountCard.innerHTML = template.accountCard(
-                            util.getAccountTypeSign(account.account_type), // account sign
-                            account.account_name, // account name
-                            util.getAccountType(account.account_type), // account type name
-                            util.getBalanceColor(account.initial_balance), // balance color
-                            util.getAmountWithCurrency(account.initial_balance, account.currency) // balance with currency sign
-                          )
+    util.getAccountTypeSign(account.account_type), // account sign
+    account.account_name, // account name
+    util.getAccountType(account.account_type), // account type name
+    util.getBalanceColor(account.initial_balance), // balance color
+    util.getAmountWithCurrency(account.initial_balance, account.currency) // balance with currency sign
+  )
   return accountCard
 }
 

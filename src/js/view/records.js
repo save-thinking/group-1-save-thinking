@@ -85,12 +85,12 @@ const recordCardComponent = (record) => {
   const recordCard = document.createElement('div')
   recordCard.classList = 'py-3 sm:py-4'
   recordCard.innerHTML = template.recordCard(
-                            record.record_type, // type of record
-                            record.record_created_time, // record time
-                            record.record_note, // record note
-                            record.record_source_account, // record source account
-                            util.getAmountWithCurrency(record.record_amount, record.currency) // balance with currency string
-                          )
+    record.record_type, // type of record
+    record.record_created_time, // record time
+    record.record_note, // record note
+    record.record_source_account, // record source account
+    util.getAmountWithCurrency(record.record_amount, record.currency) // balance with currency string
+  )
   return recordCard
 }
 
