@@ -1,82 +1,128 @@
-// initial value of the database
-let database = null
 
-function createDatabase() {
-  // name -> cse210
-  // version -> 1
+// Before opening (creating) a database using IndexedDB we must verify that the
+// browser has the necessary support,
+// for this we create a function that we will use later when creating the database:
 
-  // creating the database
-  const request = indexedDB.open('cse210', 1)
+function indexedDBSupport () {
+  return 'indexedDB' in window
+}
 
-  // adding tables into the database
-  request.onupgradeneeded = e => {
-    database = e.target.result
+// Save the connection to the database in a global variable
+// since it will later be used to carry out transactions
+let db
 
-    console.log('database +', database)
+function createDatabase () {
+  if (!indexedDBSupport()) throw new Error("Your browser doesn't support IndexedBD")
 
-    // first table : Accounts
-    // columns -> {"Name" : , "Account Type" : , "Starting Amount : ", "Currency" : }
-    const Account = database.createObjectStore('Accounts', { keyPath: 'uuid' })
+  const request = window.indexedDB.open('MyDatabase', 1)
+
+  // Event handling
+  request.onerror = (e) => {
+    console.error(`IndexedDB error: ${request.errorCode}`)
   }
 
-  // checking for errors
-  request.onerror = e => {
-    console.log(`error: ${e.target.error} was found `)
+  request.onsuccess = (e) => {
+    console.info('Successful database connection')
+    db = request.result
+  }
+
+  request.onupgradeneeded = (e) => {
+    console.info('Database created')
+    const db = request.result
+
+    const objectStore = db.createObjectStore('ACCOUNTS', { keyPath: 'id' })
+
+    // Transaction completed
+    objectStore.transaction.oncompleted = (e) => {
+      console.log('Object store "ACCOUNTS" created')
+    }
   }
 }
 
-// used to add a single account into the account table
-// send in a json from the frontend with the account details as well as db name maybe??, version as well
-function addAccountInTable() {
-  // temporary data
-  const account = {
-    uuid: 1,
-    Name: 'Pratik',
-    'Account Type': 'Savings',
-    'Starting Amount': 0,
-    Currency: 'USD'
-  }
-
-  // getting the transaction ready
-  const tx = database.transaction('Accounts', 'readwrite')
-
-  // handling errors
-  tx.onerror = e => console.log(`error: ${e.target.error} was found`)
-
-  // getting the table
-  const addAccount = tx.objectStore('Accounts')
-
-  // adding the data
-  addAccount.add(account)
+// https://stackoverflow.com/questions/105034/how-do-i-create-a-guid-uuid
+function uuidv4 () {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+          (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  )
 }
 
-// function to update database account entries
-function updateDatabaseAccount() {
-  // get the whole updated data
-  // source https://dev.to/pandresdev/update-data-from-indexeddb-31pb
+function storeAccount (account) {
+  account.id = uuidv4()
 
-}
+  const transaction = db.transaction('ACCOUNTS', 'readwrite')
 
-function deleteDatabaseAccount(id) {
-  // get the id to delete stuff
+  const objectStore = transaction.objectStore('ACCOUNTS')
 
-  const request = database.transaction('Accounts', 'readwrite').objectStore('Accounts').delete(id)
+  const request = objectStore.add(account)
 
   request.onsuccess = () => {
-    console.log(`Account deleted, id: ${request.result}`)
+    // request.result contains key of the added object
+    console.log(`New account added, id: ${request.result}`)
   }
 
   request.onerror = (err) => {
-    console.error(`Error to delete Account: ${err}`)
+    console.error(`Error to add new account: ${err}`)
   }
 }
 
+const accountA = {
+  name: 'Pratik',
+  account_type: 'Savings',
+  emoji: '',
+  fund_source: '',
+  fund_type: '',
+  initial_balance: '',
+  current_balance: '',
+  currency: 'USD'
+}
+
+// storeAccount(accountA)
+
+function updateAccount (key, account) {
+  const result = db.transaction('ACCOUNTS', 'readwrite').objectStore('ACCOUNTS')
+    .delete(key)
+
+  const transaction = db.transaction('ACCOUNTS', 'readwrite')
+
+  const objectStore = transaction.objectStore('ACCOUNTS')
+
+  const request = objectStore.add(account)
+
+  request.onsuccess = () => {
+    // request.result contains key of the added object
+    console.log(`account updated, id: ${request.result}`)
+  }
+
+  request.onerror = (err) => {
+    console.error(`Error to update account: ${err}`)
+  }
+}
+
+const accountB = {
+  id: 'sadasdasdasdad',
+  name: 'Rohan',
+  account_type: 'Savings',
+  emoji: '',
+  fund_source: '',
+  fund_type: '',
+  initial_balance: '',
+  current_balance: '',
+  currency: 'USD'
+}
+
+// updateAccount('54c783e4-8073-4ecd-912a-80f402b66079', accountB)
+
 // get data by one id
-function viewAccountById(id) {
-  const request = database.transaction('Accounts').objectStore('Accounts').get(key)
+function getAccountById (id) {
+  const request = db.transaction('ACCOUNTS').objectStore('ACCOUNTS').get(id)
 
   request.onsuccess = () => {
     const account = request.result
+
+    console.log(account)
 
     return account
   }
@@ -87,8 +133,9 @@ function viewAccountById(id) {
 }
 
 // get all accounts
-function viewAllAccounts() {
-  const request = database.transaction('Accounts').objectStore('Accounts').getAll()
+function getAllAccount () {
+  // all account with filter
+  const request = db.transaction('ACCOUNTS').objectStore('ACCOUNTS').getAll()
 
   request.onsuccess = () => {
     const accounts = request.result
