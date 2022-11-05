@@ -47,8 +47,6 @@ util.addEventListener(recordModalAddBtn, 'click', (e) => {
   addRecordCard(formJson)
   toggleAddRecordModalVisibility()
 })
-util.addEventListener(addAccountButton, 'click', toggleAddRecordModalVisibility)
-util.addEventListener(addAccountButton, 'click', toggleAddRecordModalVisibility)
 
 // addRecordButton.onclick = (e) => {
 //   toggleAddRecordModalVisibility()
