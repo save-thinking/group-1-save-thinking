@@ -37,21 +37,10 @@ const testRecordData = [{
 
 recordModalForm.innerHTML = template.recordForm()
 
-// this function would be called every time the page is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  testRecordData.map((record) => addRecordCard(record))
-})
-
-addRecordButton.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
-navBarQuickAdd.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
-recordModalCancelBtn.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
-recordModalAddBtn.onclick = (e) => {
+util.addEventListener(addRecordButton, 'click', toggleAddRecordModalVisibility)
+util.addEventListener(navBarQuickAdd, 'click', toggleAddRecordModalVisibility)
+util.addEventListener(recordModalCancelBtn, 'click', toggleAddRecordModalVisibility)
+util.addEventListener(recordModalAddBtn, 'click', (e) => {
   const formData = new FormData(recordModalForm)
   const formJson = {}
   for (const pair of formData.entries()) {
@@ -60,7 +49,27 @@ recordModalAddBtn.onclick = (e) => {
   testRecordData.push(formJson)
   addRecordCard(formJson)
   toggleAddRecordModalVisibility()
-}
+})
+
+// addRecordButton.onclick = (e) => {
+//   toggleAddRecordModalVisibility()
+// }
+// navBarQuickAdd.onclick = (e) => {
+//   toggleAddRecordModalVisibility()
+// }
+// recordModalCancelBtn.onclick = (e) => {
+//   toggleAddRecordModalVisibility()
+// }
+// recordModalAddBtn.onclick = (e) => {
+//   const formData = new FormData(recordModalForm)
+//   const formJson = {}
+//   for (const pair of formData.entries()) {
+//     formJson[pair[0]] = pair[1]
+//   }
+//   testRecordData.push(formJson)
+//   addRecordCard(formJson)
+//   toggleAddRecordModalVisibility()
+// }
 
 document.onkeyup = (e) => {
   if (e.key === 'q' && addRecordModal.classList.contains('hidden')) {
@@ -84,3 +93,11 @@ const recordCardComponent = (record) => {
   )
   return recordCard
 }
+
+// this function would be called every time the page is loaded
+util.onLoad(() => {
+  // if record list is null, it means that we are not loading the record page
+  if (recordList !== null) {
+    testRecordData.map((record) => addRecordCard(record))
+  }
+})
