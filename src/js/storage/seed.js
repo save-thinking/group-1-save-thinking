@@ -20,7 +20,7 @@ const EXPENSE = {
   Investments: '🐖',
   Housing: '🏡'
 }
-export const EXPENSE_ACCOUNTS = Object.entries(EXPENSE)
+Object.entries(EXPENSE)
   .map(([name, emoji]) => {
     return {
       name,
@@ -31,13 +31,14 @@ export const EXPENSE_ACCOUNTS = Object.entries(EXPENSE)
     }
   })
   .forEach((e) => storeAccount(e))
+
 const INCOME = {
   Salary: '💰',
   Interest: '🀄',
   Refunds: '🔄'
 }
 
-export const INCOME_ACCOUNTS = Object.entries(INCOME)
+Object.entries(INCOME)
   .map(([name, emoji]) => {
     return {
       name,
@@ -47,4 +48,6 @@ export const INCOME_ACCOUNTS = Object.entries(INCOME)
       initial_balance: 0.0
     }
   })
-  .forEach((e) => storeAccount(e))
+  .forEach((e) => {
+    storeAccount(e)
+  })

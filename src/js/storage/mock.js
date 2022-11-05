@@ -49,10 +49,16 @@ export function getAccount (id) {
   throw new StorageError(`No Record found for id ${id}`)
 }
 
-export function getAllAccounts () {
-  return Object.entries(RECORDS).map((e) => {
+export function getAllAccounts (filters) {
+  let accounts = Object.entries(ACCOUNTS).map((e) => {
     const account = e[1]
     account.id = e[0]
     return account
   })
+  if (filters) {
+    Object.keys(filters).forEach((key) => {
+      accounts = accounts.filter((account) => account[key] === filters[key])
+    })
+  }
+  return accounts
 }
