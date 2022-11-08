@@ -96,9 +96,9 @@
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-record-type"
                           >
-                            <option>Expense</option>
-                            <option>Income</option>
-                            <option>Transfer</option>
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                            <option value="transfer">Transfer</option>
                           </select>
                           <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
@@ -325,5 +325,6 @@
       </div>
     </div>
     <script type="module" src="../../js/view/records.js"></script>
+    <script type="module" src="../../js/storage/seed.js"></script>
   </body>
 </html>
