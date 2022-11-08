@@ -13,6 +13,13 @@ import {
   InvalidAmountError
 } from './exceptions.js'
 
+const FUND_EMOJI = {
+  'checking-account': '🏦',
+  'savings-account': '🏥',
+  'credit-card': '💳',
+  cash: '💸'
+}
+
 /*
 Our input is the data given from the New Account fields on the view layer. The input has the form:
 const passedInfo = {"name":"test account name","account_type":"checking-account","initial_balance":"12345","currency":"USD"}
@@ -27,6 +34,8 @@ If we have no errors, then addAccountInTable() will return the newly added accou
 export async function addAccount (account) {
   validateNewAccount(account)
   account.source = 'USER'
+  account.emoji = FUND_EMOJI[account.type]
+  account.initial_balance = Number(account.initial_balance)
   account.current_balance = account.initial_balance
   return await accountStore.storeAccount(account) // This function comes from the storage layer. Needs to be imported.
   // broadcast new record to all peers would be added here.

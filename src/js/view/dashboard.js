@@ -10,9 +10,6 @@ const accountModalCancelButton = document.querySelector(
 const accountModalAddButton = document.querySelector('#add-account-modal-btn')
 const accountModalAddForm = document.querySelector('#add-account-form')
 const addRecordModal = document.querySelector('#add-record-modal')
-const recordModalCancelBtn = document.querySelector('#record-modal-cancel-btn')
-const recordModalAddBtn = document.querySelector('#record-modal-add-btn')
-const recordModalForm = document.querySelector('#add-record-form')
 const accountList = document.querySelector('#account-list')
 
 // this function would be called every time the page is loaded
@@ -60,21 +57,6 @@ accountModalAddButton &&
     toggleAddAccountModalVisibility()
   })
 
-recordModalCancelBtn &&
-  recordModalCancelBtn.addEventListener('click', (e) =>
-    toggleAddRecordModalVisibility()
-  )
-
-recordModalAddBtn &&
-  recordModalAddBtn.addEventListener('click', (e) => {
-    const formData = new FormData(recordModalForm)
-    const formJson = {}
-    for (const pair of formData.entries()) {
-      formJson[pair[0]] = pair[1]
-    }
-    toggleAddRecordModalVisibility()
-  })
-
 document.onkeyup = (e) => {
   if (e.key === 'q' && addRecordModal.classList.contains('hidden')) {
     toggleAddRecordModalVisibility()
@@ -86,16 +68,13 @@ const addAccountCard = (account) => {
 }
 
 const accountCardComponent = (account) => {
-  console.log(account)
   const accountCard = document.createElement('div')
   accountCard.classList =
     'container p-4 m-2 h-full items-stretch max-w-xs bg-white rounded-lg border shadow-md sm:p-8 hover:bg-slate-50'
   accountCard.innerHTML = `<div class='sm:py-4'>
   <div class='flex items-center space-x-4'>
     <div class='flex'>
-      <div class='text-2xl rounded-full'>${util.getAccountTypeSign(
-        account.type
-      )}</div>
+      <div class='text-2xl rounded-full'>${account.emoji}</div>
     </div>
     <div class='flex-1 min-w-0'>
       <p class='text-sm font-medium text-gray-900 truncate'>

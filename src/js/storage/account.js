@@ -1,6 +1,7 @@
 import { db } from './idb.js'
 import { StorageError } from './exceptions.js'
 import { uuidv4 } from './utils.js'
+
 export async function storeAccount (account) {
   account.id = uuidv4()
   await db

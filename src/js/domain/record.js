@@ -7,11 +7,12 @@ Fourth, if there were no validation/storage errors then the record must have bee
 */
 
 import * as recordStore from '../storage/record.js'
+import * as accountStore from '../storage/account.js'
 import { InvalidAmountError } from './exceptions.js'
 
 /*
 Our input is the data given from the New Record fields on the view layer. The input has the form:
-const passedInfo = {"record_type":"Expense","record_source_account":"Given Source Account","record_destination_account":"Given Destination Account","record_amount":"123456","currency":"USD/Euro/else","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}
+const passedInfo = {"record_type":"Expense","record_source_account":"Given Source Account","record_destination_account":"Given Destination Account","amount":"123456","currency":"USD/Euro/else","record_note":"Sample Note.","record_created_time":"2018-07-22","record_tag":"Sample Tag"}
 
 First this function checks that the given JSON file has a valid amount, non-empty and a positive number.
 If it doesn't, the validateNewRecord function will throw a Validation Error.
@@ -22,12 +23,30 @@ If we have no errors, then addRecordInTable() will return the newly added record
 
 export async function addRecord (passedInfo) {
   validateNewRecord(passedInfo)
-  return await recordStore.storeRecord(passedInfo)
+  passedInfo.amount = Number(passedInfo.amount)
+  const result = await recordStore.storeRecord(passedInfo)
+  result.source_account = await accountStore.getAccount(result.source_account)
+  result.destination_account = await accountStore.getAccount(
+    result.destination_account
+  )
+  return result
   // broadcast new record to all peers would be added here.
 }
 
 export async function getAllRecords () {
-  return await recordStore.getAllRecords().then((records) => records.toArray())
+  let records = await recordStore.getAllRecords()
+  records = await records.toArray()
+  return Promise.all(
+    records.map(async (record) => {
+      record.source_account = await accountStore.getAccount(
+        record.source_account
+      )
+      record.destination_account = await accountStore.getAccount(
+        record.destination_account
+      )
+      return record
+    })
+  )
 }
 
 /*
@@ -36,12 +55,9 @@ This is a hard lock out on the view layer. So the initial balance is always a st
 */
 function validateNewRecord (passedInfo) {
   if (
-    Number(passedInfo.record_amount) > 0 &&
-    Number(passedInfo.record_amount) ===
-      Number(passedInfo.record_amount).toFixed(2)
+    Number(passedInfo.amount) < 0 ||
+    Number(passedInfo.amount) !== Number(passedInfo.amount).toFixed(2)
   ) {
-    // If the form was filled correctly then we can pass this record to the database.
-  } else {
     throw new InvalidAmountError('Record Amount')
   }
 }

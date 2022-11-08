@@ -3,7 +3,6 @@ export function getBalanceColor (balance) {
   if (balance < 0) {
     return 'red'
   } else {
-    console.log('HERE')
     return 'green'
   }
 }
@@ -19,22 +18,6 @@ export function getBalanceWithCurrency (balance, currency) {
 }
 
 // helper function to return sign of account
-
-// TODO - Save as `emoji` field in DB
-export function getAccountTypeSign (accountTypeString) {
-  switch (accountTypeString) {
-    case 'checking-account':
-      return '🏦'
-    case 'savings-account':
-      return '🏥'
-    case 'cash':
-      return '💸'
-    case 'credit-card':
-      return '💳'
-    default:
-      return ''
-  }
-}
 
 // helper function to return account type name to be displayed
 export function getAccountType (accountTypeString) {

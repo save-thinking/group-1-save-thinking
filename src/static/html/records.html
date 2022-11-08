@@ -86,13 +86,13 @@
                       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="record_type"
+                          for="type"
                         >
                           Record Type
                         </label>
                         <div class="relative">
                           <select
-                            name="record_type"
+                            name="type"
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-record-type"
                           >
@@ -120,19 +120,16 @@
                       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="record_source_account"
+                          for="source_account"
                         >
                           Source
                         </label>
                         <div class="relative">
                           <select
-                            name="record_source_account"
+                            name="source_account"
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-source-account"
                           >
-                            <option>BofA Account</option>
-                            <option>Citi Credit Card</option>
-                            <option>Cash</option>
                           </select>
                           <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
@@ -156,19 +153,16 @@
                       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="record_destination_account"
+                          for="destination_account"
                         >
                           Destination
                         </label>
                         <div class="relative">
                           <select
-                            name="record_destination_account"
+                            name="destination_account"
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-destination-account"
                           >
-                            <option>BofA Account</option>
-                            <option>Citi Credit Card</option>
-                            <option>Cash</option>
                           </select>
                           <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
@@ -193,12 +187,12 @@
                       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="record_amount"
+                          for="amount"
                         >
                           Amount
                         </label>
                         <input
-                          name="record_amount"
+                          name="amount"
                           class="appearance-none w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="grid-amount"
                           type="number"
@@ -250,12 +244,12 @@
                       <div class="w-full px-3">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="record_note"
+                          for="note"
                         >
                           Note
                         </label>
                         <input
-                          name="record_note"
+                          name="note"
                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="grid-note"
                           type="text"
@@ -270,12 +264,12 @@
                       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="record_created_time"
+                          for="created_at"
                         >
                           Date
                         </label>
                         <input
-                          name="record_created_time"
+                          name="created_at"
                           class="inline-block appearance-none w-full block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="grid-created-time"
                           type="date"
@@ -285,7 +279,7 @@
                       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="record_tag"
+                          for="tag"
                         >
                           Tag
                         </label>
@@ -293,7 +287,7 @@
                           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="grid-tag"
                           type="text"
-                          name="record_tag"
+                          name="tag"
                           placeholder="None"
                         />
                       </div>
