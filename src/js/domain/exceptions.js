@@ -28,11 +28,3 @@ export class InvalidAmountError extends ValidationError {
     this.property = property
   }
 }
-
-export class StorageError extends Error {
-  constructor (message, property) {
-    super(message)
-    this.name = 'StorageError'
-    this.property = property
-  }
-}

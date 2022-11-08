@@ -6,12 +6,8 @@ Third, if there was a problem storing the information, the database will throw a
 Fourth, if there were no validation/storage errors then the record must have been updated correctly, so we pass this new record, with its associated key, back to the view layer.
 */
 
-import addRecordInTable from '??'
-import {
-  InvalidAmountError,
-  ValidationError,
-  StorageError
-} from './exceptions.js'
+import * as recordStore from '../storage/record.js'
+import { InvalidAmountError } from './exceptions.js'
 
 /*
 Our input is the data given from the New Record fields on the view layer. The input has the form:
@@ -24,22 +20,14 @@ If there is a problem in storage, then the addRecordInTable function will throw 
 If we have no errors, then addRecordInTable() will return the newly added record with its database key in JSON format, which we then return.
 */
 
-export function processNewRecord (passedInfo) {
-  try {
-    validateNewRecord(passedInfo)
-    const response = addRecordInTable(passedInfo)
-    return response
-    // broadcast new record to all peers would be added here.
-  } catch (error) {
-    if (error instanceof ValidationError) {
-      throw error
-    }
-    if (error instanceof StorageError) {
-      throw error
-    } else {
-      throw error
-    }
-  }
+export async function addRecord (passedInfo) {
+  validateNewRecord(passedInfo)
+  return await recordStore.storeRecord(passedInfo)
+  // broadcast new record to all peers would be added here.
+}
+
+export async function getAllRecords () {
+  return await recordStore.getRecordsMulti()
 }
 
 /*
