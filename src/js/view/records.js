@@ -3,10 +3,6 @@ import * as storage from '../storage/mock.js'
 
 const addRecordModal = document.querySelector('#add-record-modal')
 const addRecordButton = document.querySelector('#add-record-btn')
-const navBarQuickAdd = document.querySelector('#add-record')
-const recordModalCancelBtn = document.querySelector('#record-modal-cancel-btn')
-const recordModalAddBtn = document.querySelector('#record-modal-add-btn')
-const recordModalForm = document.querySelector('#add-record-form')
 const recordModalRecordType = document.querySelector('#grid-record-type')
 const recordModalDestinationAccountDropDown = document.querySelector(
   '#grid-destination-account'
@@ -58,12 +54,13 @@ const testRecordData = [
 document.addEventListener('DOMContentLoaded', () => {
   testRecordData.map((record) => addRecordCard(record))
 })
-recordModalRecordType.addEventListener('change', (e) => {
-  populateDestinationAccountDropDown(e)
-})
-recordModalRecordType.addEventListener('click', (e) => {
-  populateDestinationAccountDropDown(e)
-})
+recordModalRecordType &&
+  recordModalRecordType.addEventListener('change', (e) => {
+    populateDestinationAccountDropDown(e)
+  }) &&
+  recordModalRecordType.addEventListener('click', (e) => {
+    populateDestinationAccountDropDown(e)
+  })
 
 function populateDestinationAccountDropDown (e) {
   let accounts = null
@@ -92,26 +89,10 @@ const accountDropDown = (account) => {
   node.innerText = `${account.emoji} ${account.name}`
   return node
 }
-
-addRecordButton.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
-navBarQuickAdd.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
-recordModalCancelBtn.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
-recordModalAddBtn.onclick = (e) => {
-  const formData = new FormData(recordModalForm)
-  const formJson = {}
-  for (const pair of formData.entries()) {
-    formJson[pair[0]] = pair[1]
-  }
-  testRecordData.push(formJson)
-  addRecordCard(formJson)
-  toggleAddRecordModalVisibility()
-}
+addRecordButton &&
+  addRecordButton.addEventListener('click', (e) => {
+    toggleAddRecordModalVisibility()
+  })
 
 document.onkeyup = (e) => {
   if (e.key === 'q' && addRecordModal.classList.contains('hidden')) {
@@ -120,7 +101,7 @@ document.onkeyup = (e) => {
 }
 
 const addRecordCard = (account) => {
-  recordList.prepend(recordCardComponent(account))
+  recordList && recordList.prepend(recordCardComponent(account))
 }
 
 const recordCardComponent = (record) => {

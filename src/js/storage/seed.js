@@ -1,4 +1,3 @@
-import { storeAccount } from './mock.js'
 /* All Seeded Accounts are pre-existing categories for Income/Expenses.
    Each will have the following fields
    - name
@@ -8,7 +7,7 @@ import { storeAccount } from './mock.js'
    - Emoji
    Expense Categories
 */
-const EXPENSE = {
+export const EXPENSE = {
   Food: '🍕',
   Groceries: '🥫',
   Alcohol: '🍻',
@@ -20,34 +19,9 @@ const EXPENSE = {
   Investments: '🐖',
   Housing: '🏡'
 }
-Object.entries(EXPENSE)
-  .map(([name, emoji]) => {
-    return {
-      name,
-      emoji,
-      fund_source: 'SEED',
-      fund_type: 'expense',
-      initial_balance: 0.0
-    }
-  })
-  .forEach((e) => storeAccount(e))
 
-const INCOME = {
+export const INCOME = {
   Salary: '💰',
   Interest: '🀄',
   Refunds: '🔄'
 }
-
-Object.entries(INCOME)
-  .map(([name, emoji]) => {
-    return {
-      name,
-      emoji,
-      fund_source: 'SEED',
-      fund_type: 'income',
-      initial_balance: 0.0
-    }
-  })
-  .forEach((e) => {
-    storeAccount(e)
-  })

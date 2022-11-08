@@ -1,5 +1,4 @@
 import * as util from './utility.js'
-
 const navBarQuickAdd = document.querySelector('#add-record')
 const addAccountModal = document.querySelector('#add-account-modal')
 const addAccountButton = document.querySelector('#add-account-btn')
@@ -49,39 +48,47 @@ const toggleAddRecordModalVisibility = () => {
 }
 
 /* Event Listeners */
-addAccountButton.onclick = (e) => {
-  toggleAddAccountModalVisibility()
-}
+addAccountButton &&
+  addAccountButton.addEventListener('click', (e) => {
+    toggleAddAccountModalVisibility()
+  })
+accountModalCancelButton &&
+  accountModalCancelButton.addEventListener('click', (e) => {
+    toggleAddAccountModalVisibility()
+  })
 
-accountModalCancelButton.onclick = (e) => {
-  toggleAddAccountModalVisibility()
-}
-navBarQuickAdd.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
+navBarQuickAdd &&
+  navBarQuickAdd.addEventListener('click', (e) => {
+    toggleAddRecordModalVisibility()
+  })
 
-accountModalAddButton.onclick = (e) => {
-  const formData = new FormData(accountModalAddForm)
-  const formJson = {}
-  for (const pair of formData.entries()) {
-    formJson[pair[0]] = pair[1]
-  }
-  testDashboardData.push(formJson)
-  addAccountCard(formJson)
-  toggleAddAccountModalVisibility()
-}
+accountModalAddButton &&
+  accountModalAddButton.addEventListener('click', (e) => {
+    const formData = new FormData(accountModalAddForm)
+    const formJson = {}
+    for (const pair of formData.entries()) {
+      formJson[pair[0]] = pair[1]
+    }
+    testDashboardData.push(formJson)
+    addAccountCard(formJson)
+    toggleAddAccountModalVisibility()
+  })
 
-recordModalCancelBtn.onclick = (e) => {
-  toggleAddRecordModalVisibility()
-}
-recordModalAddBtn.onclick = (e) => {
-  const formData = new FormData(recordModalForm)
-  const formJson = {}
-  for (const pair of formData.entries()) {
-    formJson[pair[0]] = pair[1]
-  }
-  toggleAddRecordModalVisibility()
-}
+recordModalCancelBtn &&
+  recordModalCancelBtn.addEventListener('click', (e) =>
+    toggleAddRecordModalVisibility()
+  )
+
+recordModalAddBtn &&
+  recordModalAddBtn.addEventListener('click', (e) => {
+    const formData = new FormData(recordModalForm)
+    const formJson = {}
+    for (const pair of formData.entries()) {
+      formJson[pair[0]] = pair[1]
+    }
+    toggleAddRecordModalVisibility()
+  })
+recordModalAddBtn.onclick = (e) => {}
 
 document.onkeyup = (e) => {
   if (e.key === 'q' && addRecordModal.classList.contains('hidden')) {
@@ -90,7 +97,7 @@ document.onkeyup = (e) => {
 }
 
 const addAccountCard = (account) => {
-  accountList.prepend(accountCardComponent(account))
+  accountList && accountList.prepend(accountCardComponent(account))
 }
 
 const accountCardComponent = (account) => {

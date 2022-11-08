@@ -1,14 +1,7 @@
 import { uuidv4 } from './utils.js'
+import { StorageError } from './exceptions.js'
 const RECORDS = {}
 const ACCOUNTS = {}
-
-export class StorageError extends Error {
-  constructor (message) {
-    super(message)
-    this.name = 'StorageError'
-    this.message = message
-  }
-}
 
 export function storeRecord (record) {
   const recordID = uuidv4()
