@@ -1,5 +1,6 @@
 import * as util from './utility.js'
-import * as storage from '../storage/mock.js'
+import * as recordService from '../domain/record.js'
+import * as accountService from '../domain/account.js'
 
 const addRecordModal = document.querySelector('#add-record-modal')
 const addRecordButton = document.querySelector('#add-record-btn')
@@ -10,77 +11,60 @@ const recordModalDestinationAccountDropDown = document.querySelector(
 const recordModalSourceAccountDropDown = document.querySelector(
   '#grid-source-account'
 )
+const recordList = document.querySelector('#record-list')
 
 const toggleAddRecordModalVisibility = () => {
   addRecordModal.classList.toggle('hidden')
-  populateSourceAccount()
 }
 
-const populateSourceAccount = () => {
-  const accounts = storage.getAllAccounts({ fund_source: 'USER' })
-  recordModalSourceAccountDropDown.replaceChildren()
-  accounts
-    .map((account) => accountDropDown(account))
-    .forEach((dropdown) => recordModalSourceAccountDropDown.prepend(dropdown))
+const populateDropDown = (element, filter) => {
+  console.log(element)
+  console.log(filter)
+  element.replaceChildren()
+  accountService.getAllAccounts(filter).then((accounts) => {
+    accounts
+      .map((account) => accountDropDown(account))
+      .forEach((dropdown) =>
+        recordModalSourceAccountDropDown.prepend(dropdown)
+      )
+  })
 }
 
-const recordList = document.querySelector('#record-list')
-
-// the dummy record
-const testRecordData = [
-  {
-    record_type: 'Expense',
-    record_source_account: 'BofA Account',
-    record_destination_account: 'BofA Account',
-    record_amount: '-123',
-    currency: 'USD',
-    record_note: 'this is the note',
-    record_created_time: '2018-07-22',
-    record_tag: '1'
-  },
-  {
-    record_type: 'Expense',
-    record_source_account: 'Credit Card',
-    record_destination_account: 'Credit Card',
-    record_amount: '-100',
-    currency: 'USD',
-    record_note: 'this is the note2',
-    record_created_time: '2018-07-26',
-    record_tag: '2'
-  }
-]
-
-// this function would be called every time the page is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  testRecordData.map((record) => addRecordCard(record))
+  recordService.getAllRecords().then((records) => {
+    records.map((record) => addRecordCard(record))
+  })
 })
 recordModalRecordType &&
   recordModalRecordType.addEventListener('change', (e) => {
-    populateDestinationAccountDropDown(e)
+    expenseTypeChangeHandle(e)
   }) &&
   recordModalRecordType.addEventListener('click', (e) => {
-    populateDestinationAccountDropDown(e)
+    expenseTypeChangeHandle(e)
   })
-
-function populateDestinationAccountDropDown (e) {
-  let accounts = null
+// TODO - DEBUG
+function expenseTypeChangeHandle (e) {
   switch (e.target.value) {
     case 'expense':
-      accounts = storage.getAllAccounts({ fund_type: 'expense' })
+      console.log('ROBUG')
+      populateDropDown(recordModalSourceAccountDropDown, { source: 'USER' })
+      populateDropDown(recordModalDestinationAccountDropDown, {
+        type: 'expense'
+      })
       break
     case 'income':
-      accounts = storage.getAllAccounts({ fund_type: 'income' })
+      populateDropDown(recordModalSourceAccountDropDown, { source: 'USER' })
+      populateDropDown(recordModalDestinationAccountDropDown, {
+        type: 'income'
+      })
       break
     case 'transfer':
-      accounts = storage.getAllAccounts({ fund_source: 'USER' })
+      populateDropDown(recordModalSourceAccountDropDown, { source: 'USER' })
+      populateDropDown(recordModalDestinationAccountDropDown, {
+        source: 'USER'
+      })
       break
   }
-  recordModalDestinationAccountDropDown.replaceChildren()
-  accounts
-    .map((account) => accountDropDown(account))
-    .forEach((dropdown) =>
-      recordModalDestinationAccountDropDown.prepend(dropdown)
-    )
 }
 
 const accountDropDown = (account) => {

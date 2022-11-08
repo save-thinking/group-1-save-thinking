@@ -39,6 +39,13 @@ export async function getAllUserAccounts () {
   return accounts
 }
 
+export async function getAllAccounts (filter) {
+  const accounts = await accountStore
+    .getAccountMulti(filter)
+    .then((results) => results.toArray())
+  return accounts
+}
+
 /*
 We assume here that the user is restricted from typing any non-number or decimal values into the initial balance field.
 This is a hard lock out on the view layer. So the initial balance is always a string.

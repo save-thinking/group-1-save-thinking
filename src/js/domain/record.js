@@ -27,7 +27,7 @@ export async function addRecord (passedInfo) {
 }
 
 export async function getAllRecords () {
-  return await recordStore.getRecordsMulti()
+  return await recordStore.getAllRecords().then((records) => records.toArray())
 }
 
 /*
