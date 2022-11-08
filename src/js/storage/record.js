@@ -9,10 +9,12 @@ export async function storeRecord (record) {
       const srcAccount = await db.accounts.get(record.source_account)
       const destAccount = await db.accounts.get(record.destination_account)
       await db.accounts.update(srcAccount.id, {
-        current_balance: srcAccount.current_balance - record.amount
+        current_balance:
+          Number(srcAccount.current_balance) - Number(record.amount)
       })
       await db.accounts.update(destAccount.id, {
-        current_balance: destAccount.current_balance + record.amount
+        current_balance:
+          Number(destAccount.current_balance) + Number(record.amount)
       })
     })
     .catch((e) => {

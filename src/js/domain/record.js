@@ -22,8 +22,9 @@ If we have no errors, then addRecordInTable() will return the newly added record
 */
 
 export async function addRecord (passedInfo) {
+  passedInfo.amount = Number(passedInfo.amount).toFixed(2)
   validateNewRecord(passedInfo)
-  passedInfo.amount = Number(passedInfo.amount)
+  // passedInfo.amount = Number(passedInfo.amount);
   const result = await recordStore.storeRecord(passedInfo)
   result.source_account = await accountStore.getAccount(result.source_account)
   result.destination_account = await accountStore.getAccount(
@@ -54,10 +55,7 @@ We assume here that the user is restricted from typing any non-number or decimal
 This is a hard lock out on the view layer. So the initial balance is always a string.
 */
 function validateNewRecord (passedInfo) {
-  if (
-    Number(passedInfo.amount) < 0 ||
-    Number(passedInfo.amount) !== Number(passedInfo.amount).toFixed(2)
-  ) {
+  if (passedInfo.amount < 0) {
     throw new InvalidAmountError('Record Amount')
   }
 }

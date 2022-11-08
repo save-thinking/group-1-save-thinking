@@ -1,9 +1,10 @@
 // helper function to return sign of account
+// https://tailwindcss.com/docs/content-configuration#dynamic-class-names
 export function getBalanceColor (balance) {
   if (balance < 0) {
-    return 'red'
+    return 'text-red-600'
   } else {
-    return 'green'
+    return 'text-green-600'
   }
 }
 
