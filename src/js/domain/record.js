@@ -24,7 +24,6 @@ If we have no errors, then addRecordInTable() will return the newly added record
 export async function addRecord (passedInfo) {
   passedInfo.amount = Number(passedInfo.amount).toFixed(2)
   validateNewRecord(passedInfo)
-  // passedInfo.amount = Number(passedInfo.amount);
   const result = await recordStore.storeRecord(passedInfo)
   result.source_account = await accountStore.getAccount(result.source_account)
   result.destination_account = await accountStore.getAccount(
