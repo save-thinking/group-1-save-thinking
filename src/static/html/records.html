@@ -46,72 +46,8 @@
           Add Record
         </div>
       </div>
-      <div class="flow-root">
-        <ul role="list" class="divide-y divide-gray-200">
-          <li class="py-3 sm:py-4">
-            <div class="flex items-center space-x-4">
-              <div class="flex">
-                <div class="text-2xl rounded-full">🍕</div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">Food</p>
-                <p class="text-sm text-gray-500 truncate">26th October</p>
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">
-                  Papa John's
-                </p>
-                <p class="text-sm text-gray-500 truncate">BoFA</p>
-              </div>
-              <div class="inline-flex items-center text-base text-red-600">
-                -$42.00
-              </div>
-            </div>
-          </li>
-          <li class="py-3 sm:py-4">
-            <div class="flex items-center space-x-4">
-              <div class="flex-none">
-                <div class="text-2xl rounded-full">🍞</div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">
-                  Groceries
-                </p>
-                <p class="text-sm text-gray-500 truncate">2nd October</p>
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">
-                  Weekly Groceries
-                </p>
-                <p class="text-sm text-gray-500 truncate">Credit Card</p>
-              </div>
-              <div class="inline-flex items-center text-base text-red-600">
-                -$28.22
-              </div>
-            </div>
-          </li>
 
-          <li class="py-3 sm:py-4">
-            <div class="flex items-center space-x-4">
-              <div class="flex-none">
-                <div class="text-2xl rounded-full">💰</div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">Wages</p>
-                <p class="text-sm text-gray-500 truncate">1st October</p>
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">
-                  TA Stipend October
-                </p>
-                <p class="text-sm text-gray-500 truncate">BoFA</p>
-              </div>
-              <div class="inline-flex items-center text-base text-green-600">
-                +$2400
-              </div>
-            </div>
-          </li>
-        </ul>
+      <div class="flow-root" id="record-list">
       </div>
     </div>
     <div
@@ -160,9 +96,9 @@
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-record-type"
                           >
-                            <option>Expense</option>
-                            <option>Income</option>
-                            <option>Transfer</option>
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                            <option value="transfer">Transfer</option>
                           </select>
                           <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
@@ -388,6 +324,7 @@
         </div>
       </div>
     </div>
-    <script src="../../js/view/records.js"></script>
+    <script type="module" src="../../js/view/records.js"></script>
+    <script type="module" src="../../js/storage/seed.js"></script>
   </body>
 </html>
