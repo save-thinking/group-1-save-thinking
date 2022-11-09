@@ -57,7 +57,7 @@ accountModalAddButton &&
   })
 
 document.onkeyup = (e) => {
-  if (e.key === 'q' && recordModal.classList.contains('hidden')) {
+  if (e.ctrlKey && e.key === 'q') {
     toggleAddRecordModalVisibility()
   }
 }

@@ -89,12 +89,6 @@ const accountDropDown = (account) => {
   return node
 }
 
-document.onkeyup = (e) => {
-  if (e.key === 'q' && recordModal.classList.contains('hidden')) {
-    toggleAddRecordModalVisibility()
-  }
-}
-
 const addRecordCard = (account) => {
   recordList && recordList.prepend(recordCardComponent(account))
 }
