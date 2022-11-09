@@ -1,9 +1,10 @@
 // helper function to return sign of account
+// https://tailwindcss.com/docs/content-configuration#dynamic-class-names
 export function getBalanceColor (balance) {
   if (balance < 0) {
-    return 'red'
+    return 'text-red-600'
   } else {
-    return 'green'
+    return 'text-green-600'
   }
 }
 
@@ -18,20 +19,6 @@ export function getBalanceWithCurrency (balance, currency) {
 }
 
 // helper function to return sign of account
-export function getAccountTypeSign (accountTypeString) {
-  switch (accountTypeString) {
-    case 'checking-account':
-      return '🏦'
-    case 'savings-account':
-      return '🏥'
-    case 'cash':
-      return '💸'
-    case 'credit-card':
-      return '💳'
-    default:
-      return ''
-  }
-}
 
 // helper function to return account type name to be displayed
 export function getAccountType (accountTypeString) {
