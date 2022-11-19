@@ -13,6 +13,11 @@ import {
   InvalidAmountError
 } from './exceptions.js'
 
+/**
+ * Enum for Account Type.
+ * @readonly
+ * @enum {string}
+ */
 const FUND_EMOJI = {
   'checking-account': '🏦',
   'savings-account': '🏥',
@@ -31,6 +36,11 @@ If there is a problem in storage, then the addAccountInTable function will throw
 If we have no errors, then addAccountInTable() will return the newly added account with its key, in JSON format, which we then return.
 */
 
+/**
+ *
+ * @param {{source: string, emoji: string, initial_balance: number, current_balance: number}} account
+ * @returns {{id: string, source: string, emoji: string, initial_balance: number, current_balance: number}}
+ */
 export async function addAccount (account) {
   validateNewAccount(account)
   account.source = 'USER'
