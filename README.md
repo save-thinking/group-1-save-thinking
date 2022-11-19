@@ -2,6 +2,20 @@
 
 <a name="readme-top"></a>
 
+
+To do
+
+developer
+
+1. npm run dev
+2. what each module means
+3. pr review guidelines
+
+User
+
+1. how to start the app
+2. what each button means: what a record means, what an account means
+
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -102,9 +116,6 @@
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 <!-- ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
@@ -114,8 +125,11 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ``` -->
 
-### Installation (basic CI/CD commands)
+### Installation
 
+This is how you may set up this project locally. To get a local copy up and running follow these simple steps.
+
+0. Install VSCode: this step helps with setting up a live server easily
 1. Clone the repo
    ```sh
    git clone https://github.com/save-thinking/group-1-save-thinking.git 
@@ -128,7 +142,18 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm test
    ```
-4. To run the dashboard.html/record.html file: Install the live server extension on VSCode and click on go live in the bottom blue bar
+
+### Running the Application
+
+To run the dashboard.html/record.html file: 
+
+1. Install the live server extension on VSCode, details
+    a. name: Live Server
+    b. version: v5.7.9
+    c. author: Ritwick Dey
+2. Click and open the dashboard.html/record.html file on VSCode. Click on the Go Live button on the bottom tool bar. 
+
+![go live](./images/go_live_button.png)
 
 
 ### Developer's Guide (can be moved to a new HowTo.md file)
