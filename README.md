@@ -114,7 +114,39 @@ User
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+## User Guide
+
+### Glossary
+
+Here, we define what each of the following terms in the SaveThinking application means:
+
+- `Account: ` An account is one of these: a savings bank account, a checking account, a credit card, or the amount of cash you carry in your wallet. 
+The different terms in the `Add Account` form and their meanings:
+    - `Account Name: ` The name of the account, like "Bank of America" 
+    - `Account Type: ` This is the kind of account: savings account, checking account, credit card or cash
+    - `Amount: ` The amount you spent on the expense
+    - `Initial Balance: ` The initial balance associated with the account
+   - `Currency: ` The currency the account is in. We support USD, EUR and INR currently
+- `Record: ` A record is a transaction that you make from one of the accounts you already have. It has a name description, the amount of the transaction (called amount), the account the transaction happened from, the category of the expense, the tag associated with the expense.
+The different terms in the `Add Record` form and their meanings:
+    - `Source: ` The account the transaction happened from 
+    - `Destination: ` This is the category your expenditure is in, whether you spent it on events or food or investments
+    - `Amount: ` The amount you spent on the expense
+    - `Currency: ` The currency the expense was in. We support USD, EUR and INR currently
+    - `Note: ` The description of the expense
+    - `Date: ` The date the expense took place
+    - `Tag: ` The tag you associate with the expense, like "coffee"
+
+### How to use the application
+
+1. First go to the Dashboard page
+2. Add all your accounts by using the `Add Account` button. This opens a `add account` form. The explanation for each of the term in the form is defined in the Glossary
+3. Then go to the Records page
+4. Add the expenses one by one by using the `Add Record` button. This opens a `add record` form. You can also use the `+` button at the top right of the Records or Dashboard page to open the `add record` form. The explanation for each of the term in the form is defined in the Glossary
+
+
+
+## Getting Started - Developer
 
 <!-- ### Prerequisites
 
@@ -153,7 +185,7 @@ To run the dashboard.html/record.html file:
     c. author: Ritwick Dey
 2. Click and open the dashboard.html/record.html file on VSCode. Click on the Go Live button on the bottom tool bar. 
 
-![go live](./images/go_live_button.png)
+![go live](./src/static/images/go_live_button.png)
 
 
 ### Developer's Guide (can be moved to a new HowTo.md file)
