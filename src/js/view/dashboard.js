@@ -1,3 +1,6 @@
+/** View Service - Dashboard
+ @module view/dashboard
+ */
 import * as accountService from '../domain/account.js'
 import { recordModal, accountCardComponent } from './components.js'
 const navBarQuickAdd = document.querySelector('#add-record')

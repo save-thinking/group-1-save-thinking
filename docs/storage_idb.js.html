@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: storage/idb.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,35 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: storage/idb.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** Storage Service - IDB
+ * Schema Definitions
+ @module storage/idb
+ */
+import { StorageError } from "./exceptions.js";
+import { Dexie } from "dexie";
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export const db = new Dexie("sync-save");
+db.version(1).stores({
+  accounts:
+    "id, name, source, type, initial_balance, current_balance, currency, created_at, updated_at",
+  records:
+    "id, source_account, destination_acount, amount, currency, type, note, tag, created_at, updated_at",
+});
+db.open().catch((e) => {
+  throw new StorageError(`Failed to Open DB ${e.stack}`);
+});
+</code></pre>
+        </article>
+    </section>
 
 
 

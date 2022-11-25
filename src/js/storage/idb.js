@@ -1,3 +1,7 @@
+/** Storage Service - IDB
+ * Schema Definitions
+ @module storage/idb
+ */
 import { StorageError } from './exceptions.js'
 import { Dexie } from 'dexie'
 

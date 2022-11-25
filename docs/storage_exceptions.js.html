@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: storage/exceptions.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,32 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: storage/exceptions.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** Storage Service - Exceptions
+ @module storage/exceptions
+ */
+/**
+ * Storage Error
+ * @class StorageError
+ */
+export class StorageError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "StorageError";
+    this.message = message;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

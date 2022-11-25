@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: domain/exceptions.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,64 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: domain/exceptions.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** Domain Service - Exceptions
+ @module domain/exceptions
+ */
+/**
+ * Validation Error
+ * @class ValidationError
+ */
+export class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ValidationError";
+  }
+}
+/**
+ * MissingFieldError
+ * @class MissingFieldError
+ */
+export class MissingFieldError extends ValidationError {
+  constructor(property) {
+    super("Missing: " + property);
+    this.name = "ValidationError";
+    this.property = property;
+  }
+}
+/**
+ * FormattingError
+ * @class FormattingError
+ */
+export class FormattingError extends ValidationError {
+  constructor(property) {
+    super("Format Error: " + property);
+    this.name = "ValidationError";
+    this.property = property;
+  }
+}
+/**
+ * InvalidAmountError
+ * @class InvalidAmountError
+ */
+export class InvalidAmountError extends ValidationError {
+  constructor(property) {
+    super("Invalid Amount: " + property);
+    this.name = "ValidationError";
+    this.property = property;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 
