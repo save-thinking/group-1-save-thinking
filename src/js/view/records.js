@@ -1,3 +1,6 @@
+/** View Service - Records
+ @module view/records
+ */
 import * as recordService from '../domain/record.js'
 import * as accountService from '../domain/account.js'
 import { recordModal, recordCardComponent } from './components.js'

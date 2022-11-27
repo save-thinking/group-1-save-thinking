@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: view/components.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: view/components.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** View Service - Components
+ @module view/components
+ */
+import * as util from "./utility.js";
+const RECORD_AMOUNT_COLOR_LOOKUP = {
+  expense: "red",
+  income: "green",
+  transfer: "slate",
+};
+/**
+ * @description recordCardComponent make an element on the Records Table
+ */
+export const recordCardComponent = (record) => {
+  const recordCard = document.createElement("div");
+  recordCard.classList = "py-3 sm:py-4";
+  recordCard.innerHTML = `
+&lt;div class="flex items-center space-x-4">
+  &lt;div class="flex">
+    &lt;div class="text-2xl rounded-full">${record.destination_account.emoji}&lt;/div>
+  &lt;/div>
+  &lt;div class="flex-1 min-w-0">
+    &lt;p class="text-sm font-medium text-gray-900 truncate">${
+      record.destination_account.name
+    }&lt;/p>
+    &lt;p class="text-sm text-gray-500 truncate">${record.created_at}&lt;/p>
+  &lt;/div>
+  &lt;div class="flex-1 min-w-0">
+    &lt;p class="text-sm font-medium text-gray-900 truncate">
+      ${record.note}
+    &lt;/p>
+    &lt;p class="text-sm text-gray-500 truncate">${record.source_account.name}&lt;/p>
+  &lt;/div>
+  &lt;div class="inline-flex items-center text-base text-${
+    RECORD_AMOUNT_COLOR_LOOKUP[record.type]
+  }-600">
+   ${util.getBalanceWithCurrency(record.amount, record.currency)}
+  &lt;/div>
+&lt;/div>`;
+  return recordCard;
+};
+
+/**
+ * @description accountCardComponent make an element on the Accounts Table
+ */
+export const accountCardComponent = (account) => {
+  const accountCard = document.createElement("div");
+  accountCard.classList =
+    "container p-4 m-2 h-full items-stretch max-w-xs bg-white rounded-lg border shadow-md sm:p-8 hover:bg-slate-50";
+  accountCard.innerHTML = `&lt;div class='sm:py-4'>
+  &lt;div class='flex items-center space-x-4'>
+    &lt;div class='flex'>
+      &lt;div class='text-2xl rounded-full'>${account.emoji}&lt;/div>
+    &lt;/div>
+    &lt;div class='flex-1 min-w-0'>
+      &lt;p class='text-sm font-medium text-gray-900 truncate'>
+      ${account.name}
+      &lt;/p>
+      &lt;p class='text-xs text-gray-500 truncate'>${util.getAccountType(
+        account.type
+      )}&lt;/p>
+    &lt;/div>
+    &lt;div class="inline-flex items-center text-base ${
+      account.current_balance > 0 ? "text-green-600" : "text-red-600"
+    }">
+    ${util.getBalanceWithCurrency(account.current_balance, account.currency)}
+    &lt;/div>
+  &lt;/div>
+&lt;/div>`;
+  return accountCard;
+};
+
+/**
+ * @description getRecordModal - Modal to add new Records
+ */
+const getRecordModal = () => {
+  const modal = document.createElement("div", {
+    id: "add-record-modal",
+    "aria-labelledby": "modal-title",
+    role: "dialog",
+    "aria-modal": true,
+  });
+  modal.classList.add("z-10");
+  modal.classList.add("hidden");
+  modal.innerHTML = `      &lt;!--
+    Background backdrop, show/hide based on modal state.
+
+    Entering: "ease-out duration-300"
+      From: "opacity-0"
+      To: "opacity-100"
+    Leaving: "ease-in duration-200"
+      From: "opacity-100"
+      To: "opacity-0"
+  -->
+&lt;div
+  class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+>&lt;/div>
+
+&lt;div class="fixed inset-0 z-10 overflow-y-auto">
+  &lt;div
+    class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+  >
+    &lt;div
+      class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+    >
+      &lt;div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        &lt;div class="sm:flex sm:items-start">
+          &lt;div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            &lt;form id="add-record-form"class="w-full max-w-xl mt-2">
+              &lt;div class="flex flex-wrap -mx-3 mb-6">
+                &lt;div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                  &lt;label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="type"
+                  >
+                    Record Type
+                  &lt;/label>
+                  &lt;div class="relative">
+                    &lt;select
+                      name="type"
+                      class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="grid-record-type"
+                    >
+                      &lt;option value="expense">Expense&lt;/option>
+                      &lt;option value="income">Income&lt;/option>
+                      &lt;option value="transfer">Transfer&lt;/option>
+                    &lt;/select>
+                    &lt;div
+                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                    >
+                      &lt;svg
+                        class="fill-current h-4 w-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        &lt;path
+                          d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                        />
+                      &lt;/svg>
+                    &lt;/div>
+                  &lt;/div>
+                &lt;/div>
+              &lt;/div>
+              &lt;div class="flex flex-wrap -mx-3 mb-6">
+                &lt;div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  &lt;label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="source_account"
+                  >
+                    Source
+                  &lt;/label>
+                  &lt;div class="relative">
+                    &lt;select
+                      name="source_account"
+                      class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="grid-source-account"
+                    >
+                    &lt;/select>
+                    &lt;div
+                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                    >
+                      &lt;svg
+                        class="fill-current h-4 w-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        &lt;path
+                          d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                        />
+                      &lt;/svg>
+                    &lt;/div>
+                  &lt;/div>
+                  &lt;!-- &lt;p class="text-red-500 text-xs italic">
+                      Please fill out this field.
+                    &lt;/p> -->
+                &lt;/div>
+
+                &lt;div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  &lt;label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="destination_account"
+                  >
+                    Destination
+                  &lt;/label>
+                  &lt;div class="relative">
+                    &lt;select
+                      name="destination_account"
+                      class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="grid-destination-account"
+                    >
+                    &lt;/select>
+                    &lt;div
+                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                    >
+                      &lt;svg
+                        class="fill-current h-4 w-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        &lt;path
+                          d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                        />
+                      &lt;/svg>
+                    &lt;/div>
+                  &lt;/div>
+                  &lt;!-- &lt;p class="text-red-500 text-xs italic">
+                        Please fill out this field.
+                      &lt;/p> -->
+                &lt;/div>
+              &lt;/div>
+              &lt;div class="flex flex-wrap -mx-3 mb-6">
+                &lt;div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  &lt;label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="amount"
+                  >
+                    Amount
+                  &lt;/label>
+                  &lt;input
+                    name="amount"
+                    class="appearance-none w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-amount"
+                    type="number"
+                    min="0.01"
+                    placeholder="00.00"
+                  />
+                  &lt;!-- &lt;p class="text-red-500 text-xs italic">
+                      Please fill out this field.
+                    &lt;/p> -->
+                &lt;/div>
+
+                &lt;div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  &lt;label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="currency"
+                  >
+                    Currency
+                  &lt;/label>
+                  &lt;div class="relative">
+                    &lt;select
+                      name="currency"
+                      class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="grid-currency"
+                    >
+                      &lt;option>USD&lt;/option>
+                      &lt;option>EUR&lt;/option>
+                      &lt;option>INR&lt;/option>
+                    &lt;/select>
+                    &lt;div
+                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                    >
+                      &lt;svg
+                        class="fill-current h-4 w-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        &lt;path
+                          d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                        />
+                      &lt;/svg>
+                    &lt;/div>
+                  &lt;/div>
+                  &lt;!-- &lt;p class="text-red-500 text-xs italic">
+                        Please fill out this field.
+                      &lt;/p> -->
+                &lt;/div>
+              &lt;/div>
+              &lt;div class="flex flex-wrap -mx-3 mb-6">
+                &lt;div class="w-full px-3">
+                  &lt;label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="note"
+                  >
+                    Note
+                  &lt;/label>
+                  &lt;input
+                    name="note"
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-note"
+                    type="text"
+                    placeholder="Enter Note Here"
+                  />
+                  &lt;!-- &lt;p class="text-gray-600 text-xs italic">
+                      Make it as long and as crazy as you'd like
+                    &lt;/p> -->
+                &lt;/div>
+              &lt;/div>
+              &lt;div class="flex flex-wrap -mx-3 mb-2">
+                &lt;div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                  &lt;label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="created_at"
+                  >
+                    Date
+                  &lt;/label>
+                  &lt;input
+                    name="created_at"
+                    class="inline-block appearance-none w-full block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-created-time"
+                    type="date"
+                    value="2018-07-22"
+                  />
+                &lt;/div>
+                &lt;div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                  &lt;label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="tag"
+                  >
+                    Tag
+                  &lt;/label>
+                  &lt;input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-tag"
+                    type="text"
+                    name="tag"
+                    placeholder="None"
+                  />
+                &lt;/div>
+              &lt;/div>
+            &lt;/form>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+      &lt;div
+        class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+      >
+        &lt;button
+          id="record-modal-add-btn"
+          type="button"
+          class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+        >
+          Add Record
+        &lt;/button>
+        &lt;button
+          id="record-modal-cancel-btn"
+          type="button"
+          class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+        >
+          Cancel
+        &lt;/button>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/div>`;
+  return modal;
+};
+export const recordModal = getRecordModal();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-domain_account.html">domain/account</a></li><li><a href="module-domain_exceptions.html">domain/exceptions</a></li><li><a href="module-domain_record.html">domain/record</a></li><li><a href="module-storage_account.html">storage/account</a></li><li><a href="module-storage_exceptions.html">storage/exceptions</a></li><li><a href="module-storage_idb.html">storage/idb</a></li><li><a href="module-storage_record.html">storage/record</a></li><li><a href="module-view_components.html">view/components</a></li><li><a href="module-view_dashboard.html">view/dashboard</a></li><li><a href="module-view_records.html">view/records</a></li></ul><h3>Classes</h3><ul><li><a href="module-domain_exceptions-FormattingError.html">FormattingError</a></li><li><a href="module-domain_exceptions-InvalidAmountError.html">InvalidAmountError</a></li><li><a href="module-domain_exceptions-MissingFieldError.html">MissingFieldError</a></li><li><a href="module-domain_exceptions-ValidationError.html">ValidationError</a></li><li><a href="module-storage_exceptions-StorageError.html">StorageError</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Fri Nov 25 2022 12:00:08 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,9 +1,15 @@
+/** View Service - Components
+ @module view/components
+ */
 import * as util from './utility.js'
 const RECORD_AMOUNT_COLOR_LOOKUP = {
   expense: 'red',
   income: 'green',
   transfer: 'slate'
 }
+/**
+ * @description recordCardComponent make an element on the Records Table
+ */
 export const recordCardComponent = (record) => {
   const recordCard = document.createElement('div')
   recordCard.classList = 'py-3 sm:py-4'
@@ -33,6 +39,9 @@ export const recordCardComponent = (record) => {
   return recordCard
 }
 
+/**
+ * @description accountCardComponent make an element on the Accounts Table
+ */
 export const accountCardComponent = (account) => {
   const accountCard = document.createElement('div')
   accountCard.classList =
@@ -60,6 +69,9 @@ export const accountCardComponent = (account) => {
   return accountCard
 }
 
+/**
+ * @description getRecordModal - Modal to add new Records
+ */
 const getRecordModal = () => {
   const modal = document.createElement('div', {
     id: 'add-record-modal',

@@ -1,7 +1,18 @@
+/** Storage Service - Accounts
+ @module storage/account
+ */
 import { db } from './idb.js'
 import { StorageError } from './exceptions.js'
 import { uuidv4 } from './utils.js'
 
+/**
+ * Generates ID and saves to DB
+ * @public
+ * @function storeAccount
+ *
+ * @param {Account} account
+ * @returns {Account}
+ */
 export async function storeAccount (account) {
   account.id = uuidv4()
   await db
@@ -14,6 +25,14 @@ export async function storeAccount (account) {
   return account
 }
 
+/**
+ * Updates Account
+ * @public
+ * @function updateAccount
+ * @param {string} id
+ * @param {Account} account
+ * @returns {Account}
+ */
 export async function updateAccount (id, account) {
   await db
     .transaction('rw', db.accounts, async () => {
@@ -28,6 +47,13 @@ export async function updateAccount (id, account) {
   return account
 }
 
+/**
+ * Get Account
+ * @public
+ * @function getAccount
+ * @param {string} id
+ * @returns {Account}
+ */
 export async function getAccount (id) {
   return db
     .transaction('r', db.accounts, async () => db.accounts.get(id))
@@ -35,7 +61,13 @@ export async function getAccount (id) {
       throw new StorageError(`Could not get Account - ${e.stack}`)
     })
 }
-export async function getAllAccounts (filters) {
+/**
+ * Get all Accounts
+ * @public
+ * @function getAllAccounts
+ * @returns {Array.Account}
+ */
+export async function getAllAccounts () {
   return db
     .transaction('r', db.accounts, async () => {
       return db.accounts
@@ -44,6 +76,13 @@ export async function getAllAccounts (filters) {
       throw new StorageError(`Could not get Accounts - ${e.stack}`)
     })
 }
+/**
+ * Get all Accounts given filter predicates
+ * @public
+ * @param {Array.Function} filters
+ * @function getAccountMulti
+ * @returns {Array.Account}
+ */
 export async function getAccountMulti (filters = {}) {
   return db
     .transaction('r', db.accounts, async () => {
