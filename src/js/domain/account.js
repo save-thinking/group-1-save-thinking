@@ -93,16 +93,6 @@ This is a hard lock out on the view layer. So the initial balance is always a st
  * @param {Account} account
  */
 function validateNewAccount (passedInfo) {
-  if (
-    typeof passedInfo.name === 'string' &&
-    passedInfo.name !== '' &&
-    passedInfo.initial_balance !== '' &&
-    Number(passedInfo.initial_balance) >= 0 &&
-    Number(passedInfo.initial_balance) ===
-      Number(passedInfo.initial_balance).toFixed(2)
-  ) {
-    // If this returns true then the form was filled correctly and we can our data to the database and get the account's ID.
-  }
   if (passedInfo.name === '') {
     throw new MissingFieldError('Account Name')
   }
