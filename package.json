@@ -3,7 +3,7 @@
 	"private": true,
 	"scripts": {
 		"fix": "run-p fix:*",
-		"test": "jest --config config/jest.config.js",
+		"test": "jest --config config/jest.config.js --forceExit",
 		"lint": "npx eslint src/js",
 		"fix:lint": "npx eslint --fix src/js",
 		"dev": "npx tailwindcss -c ./config/tailwind.config.js -i ./src/static/css/input.css -o ./src/static/css/output.css --watch &  npx webpack -c config/webpack.config.dev.js --watch",
@@ -12,6 +12,7 @@
 		"doc": "jsdoc -c config/jsdoc.json"
 	},
 	"devDependencies": {
+		"@babel/preset-env": "^7.20.2",
 		"eslint": "^8.27.0",
 		"jest": "^29.2.2",
 		"jsdoc": "^4.0.0",

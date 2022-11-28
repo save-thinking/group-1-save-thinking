@@ -7,11 +7,7 @@
 //  Third, if there was a problem storing the information, the database will throw a storing error. We will communicate this error to the user to reattempt the account creation.
 //  Fourth, if there were no validation/storage errors then the account must have been added correctly, so we pass this new account info, with its associated key, back to the view layer.
 import * as accountStore from '../storage/account.js'
-import {
-  MissingFieldError,
-  FormattingError,
-  InvalidAmountError
-} from './exceptions.js'
+import { MissingFieldError, FormattingError } from './exceptions.js'
 
 const FUND_EMOJI = {
   'checking-account': '🏦',
@@ -57,7 +53,8 @@ export async function addAccount (account) {
   account.emoji = FUND_EMOJI[account.type]
   account.initial_balance = Number(account.initial_balance)
   account.current_balance = account.initial_balance
-  return await accountStore.storeAccount(account) // This function comes from the storage layer. Needs to be imported.
+  const result = await accountStore.storeAccount(account)
+  return result
   // broadcast new record to all peers would be added here.
 }
 
@@ -114,12 +111,5 @@ function validateNewAccount (passedInfo) {
   }
   if (typeof passedInfo.name !== 'string') {
     throw new FormattingError('Account Name')
-  }
-  if (
-    typeof passedInfo.name !== 'string' ||
-    passedInfo.name === '' ||
-    passedInfo.initial_balance === ''
-  ) {
-    throw new InvalidAmountError('Initial Balance')
   }
 }
