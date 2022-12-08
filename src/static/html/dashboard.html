@@ -5,7 +5,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="icon" type="image/x-icon" href="../images/favicon.png" />
+    <link id="logo" rel="icon" type="image/x-icon" href="../images/favicon.png" />
     <link rel="stylesheet" href="../css/output.css" />
     <title>SaveThink</title>
   </head>
@@ -21,6 +21,7 @@
           <div class="text-white text-xl">SaveThink</div>
         </div>
         <a
+          id = "dashboard-button"
           href="./dashboard.html"
           class="bg-red-500 hover:bg-red-300 hover:text-base text-white px-3 py-2 rounded-md text-sm font-medium nav-active"
           aria-current="page"
@@ -28,6 +29,7 @@
         >
 
         <a
+          id = "record-button"
           href="./records.html"
           class="bg-red-500 hover:bg-red-300 hover:text-base text-white px-3 py-2 rounded-md text-sm font-medium"
           >Records</a
@@ -185,9 +187,9 @@
                             id="grid-currency"
                             name="currency"
                           >
-                            <option>USD</option>
-                            <option>EUR</option>
-                            <option>INR</option>
+                            <option value="usd">USD</option>
+                            <option value="eur">EUR</option>
+                            <option value="inr">INR</option>
                           </select>
                           <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
