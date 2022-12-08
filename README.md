@@ -2,6 +2,20 @@
 
 <a name="readme-top"></a>
 
+
+To do
+
+developer
+
+1. npm run dev
+2. what each module means
+3. pr review guidelines
+
+User
+
+1. how to start the app
+2. what each button means: what a record means, what an account means
+
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -100,10 +114,39 @@
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+## User Guide
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+### Glossary
+
+Here, we define what each of the following terms in the SaveThinking application means:
+
+- `Account: ` An account is one of these: a savings bank account, a checking account, a credit card, or the amount of cash you carry in your wallet. 
+The different terms in the `Add Account` form and their meanings:
+    - `Account Name: ` The name of the account, like "Bank of America" 
+    - `Account Type: ` This is the kind of account: savings account, checking account, credit card or cash
+    - `Amount: ` The amount you spent on the expense
+    - `Initial Balance: ` The initial balance associated with the account
+   - `Currency: ` The currency the account is in. We support USD, EUR and INR currently
+- `Record: ` A record is a transaction that you make from one of the accounts you already have. It has a name description, the amount of the transaction (called amount), the account the transaction happened from, the category of the expense, the tag associated with the expense.
+The different terms in the `Add Record` form and their meanings:
+    - `Source: ` The account the transaction happened from 
+    - `Destination: ` This is the category your expenditure is in, whether you spent it on events or food or investments
+    - `Amount: ` The amount you spent on the expense
+    - `Currency: ` The currency the expense was in. We support USD, EUR and INR currently
+    - `Note: ` The description of the expense
+    - `Date: ` The date the expense took place
+    - `Tag: ` The tag you associate with the expense, like "coffee"
+
+### How to use the application
+
+1. First go to the Dashboard page
+2. Add all your accounts by using the `Add Account` button. This opens a `add account` form. The explanation for each of the term in the form is defined in the Glossary
+3. Then go to the Records page
+4. Add the expenses one by one by using the `Add Record` button. This opens a `add record` form. You can also use the `+` button at the top right of the Records or Dashboard page to open the `add record` form. The explanation for each of the term in the form is defined in the Glossary
+
+
+
+## Getting Started - Developer
 
 <!-- ### Prerequisites
 
@@ -114,8 +157,11 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ``` -->
 
-### Installation (basic CI/CD commands)
+### Installation
 
+This is how you may set up this project locally. To get a local copy up and running follow these simple steps.
+
+0. Install VSCode: this step helps with setting up a live server easily
 1. Clone the repo
    ```sh
    git clone https://github.com/save-thinking/group-1-save-thinking.git 
@@ -128,7 +174,18 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm test
    ```
-4. To run the dashboard.html/record.html file: Install the live server extension on VSCode and click on go live in the bottom blue bar
+
+### Running the Application
+
+To run the dashboard.html/record.html file: 
+
+1. Install the live server extension on VSCode, details
+    a. name: Live Server
+    b. version: v5.7.9
+    c. author: Ritwick Dey
+2. Click and open the dashboard.html/record.html file on VSCode. Click on the Go Live button on the bottom tool bar. 
+
+![go live](./src/static/images/go_live_button.png)
 
 
 ### Developer's Guide (can be moved to a new HowTo.md file)
