@@ -17,6 +17,7 @@ const recordModalCancelBtn = recordModal.querySelector(
 )
 const recordModalAddBtn = recordModal.querySelector('#record-modal-add-btn')
 const recordModalForm = recordModal.querySelector('#add-record-form')
+const exportRecordsBtn = document.querySelector('#export-records-btn')
 
 const toggleAddRecordModalVisibility = () => {
   recordModal.classList.toggle('hidden')
@@ -46,6 +47,11 @@ recordModalCancelBtn &&
   recordModalCancelBtn.addEventListener('click', (e) =>
     toggleAddRecordModalVisibility()
   )
+
+exportRecordsBtn &&
+  exportRecordsBtn.addEventListener('click', async (e) => {
+    await recordService.exportRecords()
+  })
 
 recordModalAddBtn &&
   recordModalAddBtn.addEventListener('click', (e) => {

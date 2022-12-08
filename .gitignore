@@ -90,3 +90,4 @@ lerna-debug.log
 Thumbs.db
 
 dist
+.vscode
