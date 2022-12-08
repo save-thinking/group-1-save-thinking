@@ -29,5 +29,5 @@ jobs:
       - name: Run tests and get test coverage
         run: |
           npm run build
-          npx http-server -p 5500 &
+          npm run serve
           npm test
