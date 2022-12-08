@@ -5,7 +5,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link id="logo" rel="icon" type="image/x-icon" href="../images/favicon.png" />
+    <link
+      id="logo"
+      rel="icon"
+      type="image/x-icon"
+      href="../images/favicon.png"
+    />
     <link rel="stylesheet" href="../css/output.css" />
     <title>SaveThink</title>
   </head>
@@ -21,7 +26,7 @@
           <div class="text-white text-xl">SaveThink</div>
         </div>
         <a
-          id = "dashboard-button"
+          id="dashboard-button"
           href="./dashboard.html"
           class="bg-red-500 hover:bg-red-300 hover:text-base text-white px-3 py-2 rounded-md text-sm font-medium nav-active"
           aria-current="page"
@@ -29,7 +34,7 @@
         >
 
         <a
-          id = "record-button"
+          id="record-button"
           href="./records.html"
           class="bg-red-500 hover:bg-red-300 hover:text-base text-white px-3 py-2 rounded-md text-sm font-medium"
           >Records</a
@@ -56,6 +61,150 @@
         Add Account
       </div>
     </div>
+
+    <div class="flex justify-center p-4 w-screen sm:p-8" id="account-summary">
+      <div
+        class="container p-4 m-2 bg-white rounded-lg border shadow-md sm:p-4 hover:bg-slate-50"
+      >
+        <div class="text-slate-100">Cashflow</div>
+        <div class="border m-2"></div>
+        <div class="container p-2">
+          <canvas id="cashflow-chart"></canvas>
+        </div>
+        <div class="flex-row justify-around">
+          <div class="mt-2 flex justify-between">
+            <div class="text-sm">Balance</div>
+            <div id="cashflow-card-balance" class="text-sm">$200</div>
+          </div>
+          <div class="border"></div>
+          <div class="mt-2 flex justify-between">
+            <div class="text-sm">Income</div>
+            <div id="cashflow-card-income" class="text-sm text-green-600">
+              $200
+            </div>
+          </div>
+          <div class="border"></div>
+          <div class="mt-2 flex justify-between">
+            <div class="text-sm">Expense</div>
+            <div id="cashflow-card-expense" class="text-sm text-red-600">
+              $200
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="grow container p-4 m-2 bg-white rounded-lg border shadow-md sm:p-4 hover:bg-slate-50"
+      >
+        <div class="text-slate-100">Recent Records</div>
+        <div class="border m-2"></div>
+        <div class="py-2 sm:py-2">
+          <div class="flex items-center space-x-4">
+            <div class="flex">
+              <div class="text-2xl rounded-full">🍕</div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Food</p>
+              <p class="text-sm text-gray-500 truncate">2022-12-06</p>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Pizza</p>
+              <p class="text-sm text-gray-500 truncate">Bank of America</p>
+            </div>
+            <div class="inline-flex items-center text-base text-red-600">
+              $25.00
+            </div>
+          </div>
+        </div>
+        <div class="border"></div>
+        <div class="py-2 sm:py-2">
+          <div class="flex items-center space-x-4">
+            <div class="flex">
+              <div class="text-2xl rounded-full">🍕</div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Food</p>
+              <p class="text-sm text-gray-500 truncate">2022-12-06</p>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Pizza</p>
+              <p class="text-sm text-gray-500 truncate">Bank of America</p>
+            </div>
+            <div class="inline-flex items-center text-base text-red-600">
+              $25.00
+            </div>
+          </div>
+        </div>
+        <div class="border"></div>
+        <div class="py-2 sm:py-2">
+          <div class="flex items-center space-x-4">
+            <div class="flex">
+              <div class="text-2xl rounded-full">🍕</div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Food</p>
+              <p class="text-sm text-gray-500 truncate">2022-12-06</p>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Pizza</p>
+              <p class="text-sm text-gray-500 truncate">Bank of America</p>
+            </div>
+            <div class="inline-flex items-center text-base text-red-600">
+              $25.00
+            </div>
+          </div>
+        </div>
+        <div class="border"></div>
+        <div class="py-2 sm:py-2">
+          <div class="flex items-center space-x-4">
+            <div class="flex">
+              <div class="text-2xl rounded-full">🍕</div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Food</p>
+              <p class="text-sm text-gray-500 truncate">2022-12-06</p>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Pizza</p>
+              <p class="text-sm text-gray-500 truncate">Bank of America</p>
+            </div>
+            <div class="inline-flex items-center text-base text-red-600">
+              $25.00
+            </div>
+          </div>
+        </div>
+        <div class="border"></div>
+        <div class="sm:py-4">
+          <div class="flex items-center space-x-4">
+            <div class="flex">
+              <div class="text-2xl rounded-full">🍕</div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Food</p>
+              <p class="text-sm text-gray-500 truncate">2022-12-06</p>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">Pizza</p>
+              <p class="text-sm text-gray-500 truncate">Bank of America</p>
+            </div>
+            <div class="inline-flex items-center text-base text-red-600">
+              $25.00
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="container p-4 m-2 bg-white rounded-lg border shadow-md sm:p-4 hover:bg-slate-50"
+      >
+        <div class="text-slate-100">Expense Categories</div>
+        <div class="border m-2"></div>
+        <div class="p-2">
+          <canvas id="expense-donut-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
     <div
       id="add-account-modal"
       class="z-10 hidden"
@@ -235,6 +384,58 @@
       </div>
     </div>
     <script src="../../../dist/output.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById("cashflow-chart");
+      const cashflow_data = {
+        labels: ["Income", "Expense"],
+        datasets: [
+          {
+            label: "Category",
+            data: [100, 200],
+            backgroundColor: ["rgb(34, 197, 94)", "rgb(225, 29, 72)"],
+            borderWidth: 1,
+            barThickness: 20,
+          },
+        ],
+      };
+      new Chart(ctx, {
+        type: "bar",
+        data: cashflow_data,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+    <script>
+      const donut_0 = document.getElementById("expense-donut-chart");
+      const data = {
+        labels: ["Food", "Rent", "Shopping"],
+        datasets: [
+          {
+            label: "Expenses",
+            data: [300, 50, 100],
+            backgroundColor: [
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+            ],
+            hoverOffset: 4,
+          },
+        ],
+      };
+      new Chart(donut_0, {
+        type: "doughnut",
+        data: data,
+        options: {
+          responsive: false,
+        },
+      });
+    </script>
     <noscript>Please enable JavaScript.</noscript>
   </body>
 </html>
