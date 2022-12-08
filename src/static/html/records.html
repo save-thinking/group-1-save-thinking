@@ -35,7 +35,10 @@
           >Records</a
         >
       </div>
-      <div id="add-record" class="flex space-x-2 bg-white hover:bg-red-300 hover:text-base text-white px-3 py-2 rounded-md text-sm font-medium nav-active">
+      <div
+        id="add-record"
+        class="flex space-x-2 bg-white hover:bg-red-300 hover:text-base text-white px-3 py-2 rounded-md text-sm font-medium nav-active"
+      >
         +
       </div>
     </div>
@@ -44,13 +47,23 @@
     >
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-xl font-bold leading-none text-gray-900">Records</h3>
-        <div id="add-record-btn" class="flex space-x-2 bg-red-600 hover:bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium"">
-          Add Record
+        <div class="flex justify-around space-x-2">
+          <div
+            id="export-records-btn"
+            class="flex space-x-2 bg-red-600 hover:bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium"
+          >
+            Export Records
+          </div>
+          <div
+            id="add-record-btn"
+            class="flex space-x-2 bg-red-600 hover:bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium"
+          >
+            Add Record
+          </div>
         </div>
       </div>
 
-      <div class="flow-root" id="record-list">
-      </div>
+      <div class="flow-root" id="record-list"></div>
     </div>
     <script src="../../../dist/output.js"></script>
     <noscript>Please enable JavaScript.</noscript>

@@ -12,6 +12,7 @@ Fourth, if there were no validation/storage errors then the record must have bee
 
 import * as recordStore from '../storage/record.js'
 import * as accountStore from '../storage/account.js'
+import { donwloadCSV } from '../utils.js'
 import { InvalidAmountError } from './exceptions.js'
 
 /*
@@ -63,6 +64,25 @@ export async function getAllRecords () {
       return record
     })
   )
+}
+
+export async function exportRecords () {
+  let records = await recordStore.getAllRecords()
+  records = await records.toArray()
+  records = await Promise.all(
+    records.map(async (record) => {
+      record.source_account = await accountStore.getAccount(
+        record.source_account
+      )
+      record.source_account = record.source_account.name
+      record.destination_account = await accountStore.getAccount(
+        record.destination_account
+      )
+      record.destination_account = record.destination_account.name
+      return record
+    })
+  )
+  donwloadCSV(records, 'records.csv')
 }
 
 /*
