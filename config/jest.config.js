@@ -5,4 +5,7 @@ module.exports = {
   coverageReporters: ["text", "cobertura"],
   preset: "jest-puppeteer",
   verbose: true,
+  transform: {
+    "^.+\\.[t|j]sx?$": "babel-jest",
+  },
 };

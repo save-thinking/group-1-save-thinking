@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: view/records.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: view/records.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** View Service - Records
+ @module view/records
+ */
+import * as recordService from "../domain/record.js";
+import * as accountService from "../domain/account.js";
+import { recordModal, recordCardComponent } from "./components.js";
+
+const recordList = document.querySelector("#record-list");
+const addRecordButton = document.querySelector("#add-record-btn");
+const recordModalRecordType = recordModal.querySelector("#grid-record-type");
+const dstAccountDropDown = recordModal.querySelector(
+  "#grid-destination-account"
+);
+const srcAccountDropDown = recordModal.querySelector("#grid-source-account");
+const recordModalCancelBtn = recordModal.querySelector(
+  "#record-modal-cancel-btn"
+);
+const recordModalAddBtn = recordModal.querySelector("#record-modal-add-btn");
+const recordModalForm = recordModal.querySelector("#add-record-form");
+
+const toggleAddRecordModalVisibility = () => {
+  recordModal.classList.toggle("hidden");
+  expenseTypeChangeHandle("expense");
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.appendChild(recordModal);
+  recordService.getAllRecords().then((records) => {
+    records.map((record) => addRecordCard(record));
+  });
+});
+recordModalRecordType &amp;&amp;
+  recordModalRecordType.addEventListener("change", (e) => {
+    expenseTypeChangeHandle(e.target.value);
+  }) &amp;&amp;
+  recordModalRecordType.addEventListener("click", (e) => {
+    expenseTypeChangeHandle(e.target.value);
+  });
+
+addRecordButton &amp;&amp;
+  addRecordButton.addEventListener("click", (e) => {
+    toggleAddRecordModalVisibility();
+  });
+
+recordModalCancelBtn &amp;&amp;
+  recordModalCancelBtn.addEventListener("click", (e) =>
+    toggleAddRecordModalVisibility()
+  );
+
+recordModalAddBtn &amp;&amp;
+  recordModalAddBtn.addEventListener("click", (e) => {
+    const formData = new FormData(recordModalForm);
+    const formJson = {};
+    for (const pair of formData.entries()) {
+      formJson[pair[0]] = pair[1];
+    }
+    recordService.addRecord(formJson).then((record) => {
+      addRecordCard(record);
+    });
+    toggleAddRecordModalVisibility();
+  });
+
+const populateDropDown = (element, filter) => {
+  element.replaceChildren();
+  accountService.getAllAccounts(filter).then((accounts) => {
+    accounts
+      .map((account) => accountDropDown(account))
+      .forEach((dropdown) => element.prepend(dropdown));
+  });
+};
+const expenseTypeChangeHandle = (recordType) => {
+  switch (recordType) {
+    case "expense":
+      populateDropDown(srcAccountDropDown, { source: "USER" });
+      populateDropDown(dstAccountDropDown, { type: "expense" });
+      break;
+    case "income":
+      populateDropDown(srcAccountDropDown, { type: "income" });
+      populateDropDown(dstAccountDropDown, { source: "USER" });
+      break;
+    case "transfer":
+      populateDropDown(srcAccountDropDown, { source: "USER" });
+      populateDropDown(dstAccountDropDown, { source: "USER" });
+      break;
+  }
+};
+
+const accountDropDown = (account) => {
+  const node = document.createElement("option");
+  node.value = account.id;
+  node.innerText = `${account.emoji} ${account.name}`;
+  return node;
+};
+
+const addRecordCard = (account) => {
+  recordList &amp;&amp; recordList.prepend(recordCardComponent(account));
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-domain_account.html">domain/account</a></li><li><a href="module-domain_exceptions.html">domain/exceptions</a></li><li><a href="module-domain_record.html">domain/record</a></li><li><a href="module-storage_account.html">storage/account</a></li><li><a href="module-storage_exceptions.html">storage/exceptions</a></li><li><a href="module-storage_idb.html">storage/idb</a></li><li><a href="module-storage_record.html">storage/record</a></li><li><a href="module-view_components.html">view/components</a></li><li><a href="module-view_dashboard.html">view/dashboard</a></li><li><a href="module-view_records.html">view/records</a></li></ul><h3>Classes</h3><ul><li><a href="module-domain_exceptions-FormattingError.html">FormattingError</a></li><li><a href="module-domain_exceptions-InvalidAmountError.html">InvalidAmountError</a></li><li><a href="module-domain_exceptions-MissingFieldError.html">MissingFieldError</a></li><li><a href="module-domain_exceptions-ValidationError.html">ValidationError</a></li><li><a href="module-storage_exceptions-StorageError.html">StorageError</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Fri Nov 25 2022 12:00:08 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

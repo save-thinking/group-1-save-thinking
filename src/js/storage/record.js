@@ -1,6 +1,18 @@
+/** Storage Service - Records
+ @module storage/record
+ */
 import { db } from './idb.js'
 import { StorageError } from './exceptions.js'
 import { uuidv4 } from './utils.js'
+
+/**
+ * Generates ID and saves to DB
+ * @public
+ * @function storeRecord
+ *
+ * @param {Record} record
+ * @returns {Record}
+ */
 export async function storeRecord (record) {
   record.id = uuidv4()
   await db
@@ -23,6 +35,14 @@ export async function storeRecord (record) {
   return record
 }
 
+/**
+ * Updates Record
+ * @public
+ * @function updateRecord
+ * @param {string} id
+ * @param {Record} record
+ * @returns {Record}
+ */
 export async function updateRecord (id, record) {
   await db
     .transaction('rw', db.records, db.accounts, async () => {
@@ -56,6 +76,13 @@ export async function updateRecord (id, record) {
   return record
 }
 
+/**
+ * Get Record
+ * @public
+ * @function getRecord
+ * @param {string} id
+ * @returns {Record}
+ */
 export async function getRecord (id) {
   return db
     .transaction('r', db.records, async () => db.records.get(id))
@@ -63,6 +90,13 @@ export async function getRecord (id) {
       throw new StorageError(`Could not get Record - ${e.stack}`)
     })
 }
+
+/**
+ * Get all Records
+ * @public
+ * @function getAllRecords
+ * @returns {Array.Record}
+ */
 export async function getAllRecords () {
   return db
     .transaction('r', db.records, async () => {
@@ -72,6 +106,13 @@ export async function getAllRecords () {
       throw new StorageError(`Could not get Records - ${e.stack}`)
     })
 }
+/**
+ * Get all Records given filter predicates
+ * @public
+ * @param {Array.Function} filters
+ * @function getRecordsMulti
+ * @returns {Array.Record}
+ */
 export async function getRecordsMulti (filters = {}) {
   return db
     .transaction('r', db.records, async () => {

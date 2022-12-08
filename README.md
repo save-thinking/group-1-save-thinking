@@ -221,10 +221,14 @@ Format for GitHub pushes and pull requests:
 2. Create a new branch called 
   a. Feature/name_of_feature
   b. Bug/name_of_bug
-3. Push changes to your branch
-4. Create a new Pull request:
-  a. Ensure that all changes made are listed 
-  b. Add screenshots showing that the new changes work
+3. Make sure your feature branch builds successfully and passes all tests.
+4. Push changes to your branch
+5. Create a new Pull request:
+   - Ensure that all changes made are listed 
+   - Add screenshots showing that the new changes work
+   - Get atleast one approving review
+6. Delete local and remote branches after merging
+ 
 
 
 After every push:
@@ -232,6 +236,9 @@ After every push:
 1. Check the build workflow in the actions tab in GitHub
 2. Check if there are any linter issues
 3. Check if all tests have passed
+
+
+For detailed process guidelines, refer https://github.com/save-thinking/docs/blob/main/process-guidelines.md
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
