@@ -33,3 +33,11 @@ export class FormattingError extends ValidationError {
     this.property = property
   }
 }
+
+export class InvalidAmountError extends ValidationError {
+  constructor (property) {
+    super('Invalid Amount: ' + property)
+    this.name = 'InvalidAmountError'
+    this.property = property
+  }
+}
