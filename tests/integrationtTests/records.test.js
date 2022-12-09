@@ -1,6 +1,6 @@
 describe("Record Page", () => {
   beforeAll(async () => {
-    await page.goto("http://127.0.0.1:5501/src/static/html/records.html", {
+    await page.goto("http://127.0.0.1:5500/src/static/html/records.html", {
       waitUntil: "load",
       timeout: 60000,
     });
