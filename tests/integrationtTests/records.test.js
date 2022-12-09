@@ -9,12 +9,18 @@ describe("Record Page", () => {
   it("has all records page components", async () => {
     const title = await page.title();
     await expect(title).toMatch("SaveThink");
-    await page.waitForSelector("#add-record");
-    await page.waitForSelector("#export-records-btn");
-    await page.waitForSelector("#record-list");
-    await page.waitForSelector("#record-button");
-    await page.waitForSelector("#dashboard-button");
-    await page.waitForSelector("#logo");
+    const addRcdBttn = page.$("#add-record");
+    await expect(addRcdBttn).not.toBeNull();
+    const exportRcdBttn = page.$("#export-records-btn");
+    await expect(exportRcdBttn).not.toBeNull();
+    const rcdList = page.$("#record-list");
+    await expect(rcdList).not.toBeNull();
+    const rcdBtn = page.$("#record-button");
+    await expect(rcdBtn).not.toBeNull();
+    const dashboardBtn = page.$("#dashboard-button");
+    await expect(dashboardBtn).not.toBeNull();
+    const logo = page.$("#logo");
+    await expect(logo).not.toBeNull();
   });
 
   it("correct record form", async () => {

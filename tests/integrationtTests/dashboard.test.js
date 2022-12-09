@@ -6,12 +6,18 @@ describe("Dashboard Page", () => {
   it("has all dashboard components", async () => {
     const title = await page.title();
     await expect(title).toMatch("SaveThink");
-    await page.waitForSelector("#add-record");
-    await page.waitForSelector("#add-account-btn");
-    await page.waitForSelector("#account-list");
-    await page.waitForSelector("#record-button");
-    await page.waitForSelector("#dashboard-button");
-    await page.waitForSelector("#logo");
+    const addRcdBttn = page.$("#add-record");
+    await expect(addRcdBttn).not.toBeNull();
+    const addAcctBttn = page.$("#add-account-btn");
+    await expect(addAcctBttn).not.toBeNull();
+    const acctList = page.$("#account-list");
+    await expect(acctList).not.toBeNull();
+    const rcdBtn = page.$("#record-button");
+    await expect(rcdBtn).not.toBeNull();
+    const dashboardBtn = page.$("#dashboard-button");
+    await expect(dashboardBtn).not.toBeNull();
+    const logo = page.$("#logo");
+    await expect(logo).not.toBeNull();
   });
 
   it("correct account form", async () => {
