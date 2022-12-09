@@ -2,20 +2,6 @@
 
 <a name="readme-top"></a>
 
-
-To do
-
-developer
-
-1. npm run dev
-2. what each module means
-3. pr review guidelines
-
-User
-
-1. how to start the app
-2. what each button means: what a record means, what an account means
-
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -32,7 +18,7 @@ User
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-<!-- 
+<!--
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -120,22 +106,11 @@ User
 
 Here, we define what each of the following terms in the SaveThinking application means:
 
-- `Account: ` An account is one of these: a savings bank account, a checking account, a credit card, or the amount of cash you carry in your wallet. 
-The different terms in the `Add Account` form and their meanings:
-    - `Account Name: ` The name of the account, like "Bank of America" 
-    - `Account Type: ` This is the kind of account: savings account, checking account, credit card or cash
-    - `Amount: ` The amount you spent on the expense
-    - `Initial Balance: ` The initial balance associated with the account
-   - `Currency: ` The currency the account is in. We support USD, EUR and INR currently
+- `Account: ` An account is one of these: a savings bank account, a checking account, a credit card, or the amount of cash you carry in your wallet.
+  The different terms in the `Add Account` form and their meanings: - `Account Name: ` The name of the account, like "Bank of America" - `Account Type: ` This is the kind of account: savings account, checking account, credit card or cash - `Amount: ` The amount you spent on the expense - `Initial Balance: ` The initial balance associated with the account
+  - `Currency: ` The currency the account is in. We support USD, EUR and INR currently
 - `Record: ` A record is a transaction that you make from one of the accounts you already have. It has a name description, the amount of the transaction (called amount), the account the transaction happened from, the category of the expense, the tag associated with the expense.
-The different terms in the `Add Record` form and their meanings:
-    - `Source: ` The account the transaction happened from 
-    - `Destination: ` This is the category your expenditure is in, whether you spent it on events or food or investments
-    - `Amount: ` The amount you spent on the expense
-    - `Currency: ` The currency the expense was in. We support USD, EUR and INR currently
-    - `Note: ` The description of the expense
-    - `Date: ` The date the expense took place
-    - `Tag: ` The tag you associate with the expense, like "coffee"
+  The different terms in the `Add Record` form and their meanings: - `Source: ` The account the transaction happened from - `Destination: ` This is the category your expenditure is in, whether you spent it on events or food or investments - `Amount: ` The amount you spent on the expense - `Currency: ` The currency the expense was in. We support USD, EUR and INR currently - `Note: ` The description of the expense - `Date: ` The date the expense took place - `Tag: ` The tag you associate with the expense, like "coffee"
 
 ### How to use the application
 
@@ -143,8 +118,6 @@ The different terms in the `Add Record` form and their meanings:
 2. Add all your accounts by using the `Add Account` button. This opens a `add account` form. The explanation for each of the term in the form is defined in the Glossary
 3. Then go to the Records page
 4. Add the expenses one by one by using the `Add Record` button. This opens a `add record` form. You can also use the `+` button at the top right of the Records or Dashboard page to open the `add record` form. The explanation for each of the term in the form is defined in the Glossary
-
-
 
 ## Getting Started - Developer
 
@@ -164,7 +137,7 @@ This is how you may set up this project locally. To get a local copy up and runn
 0. Install VSCode: this step helps with setting up a live server easily
 1. Clone the repo
    ```sh
-   git clone https://github.com/save-thinking/group-1-save-thinking.git 
+   git clone https://github.com/save-thinking/group-1-save-thinking.git
    ```
 2. Install NPM packages
    ```sh
@@ -177,16 +150,15 @@ This is how you may set up this project locally. To get a local copy up and runn
 
 ### Running the Application
 
-To run the dashboard.html/record.html file: 
+To run the dashboard.html/record.html file:
 
 1. Install the live server extension on VSCode, details
-    a. name: Live Server
-    b. version: v5.7.9
-    c. author: Ritwick Dey
-2. Click and open the dashboard.html/record.html file on VSCode. Click on the Go Live button on the bottom tool bar. 
+   a. name: Live Server
+   b. version: v5.7.9
+   c. author: Ritwick Dey
+2. Click and open the dashboard.html/record.html file on VSCode. Click on the Go Live button on the bottom tool bar.
 
 ![go live](./src/static/images/go_live_button.png)
-
 
 ### Developer's Guide (can be moved to a new HowTo.md file)
 
@@ -194,23 +166,25 @@ Starting work on the project:
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/save-thinking/group-1-save-thinking.git 
+   git clone https://github.com/save-thinking/group-1-save-thinking.git
    ```
 2. Install NPM packages
+
    ```sh
    npm install
    ```
-Before every push do the following:
 
-1. To fix all the code formatting on your end:
+   Before every push do the following:
+
+3. To fix all the code formatting on your end:
    ```sh
    npm run fix
    ```
-2. To check lint issues:
+4. To check lint issues:
    ```sh
    npm run lint
    ```
-3. To run the test suite and check code coverage:
+5. To run the test suite and check code coverage:
    ```sh
    npm test
    ```
@@ -218,25 +192,22 @@ Before every push do the following:
 Format for GitHub pushes and pull requests:
 
 1. Never push to main
-2. Create a new branch called 
-  a. Feature/name_of_feature
-  b. Bug/name_of_bug
+2. Create a new branch called
+   a. Feature/name_of_feature
+   b. Bug/name_of_bug
 3. Make sure your feature branch builds successfully and passes all tests.
 4. Push changes to your branch
 5. Create a new Pull request:
-   - Ensure that all changes made are listed 
+   - Ensure that all changes made are listed
    - Add screenshots showing that the new changes work
    - Get atleast one approving review
 6. Delete local and remote branches after merging
- 
-
 
 After every push:
 
 1. Check the build workflow in the actions tab in GitHub
 2. Check if there are any linter issues
 3. Check if all tests have passed
-
 
 For detailed process guidelines, refer https://github.com/save-thinking/docs/blob/main/process-guidelines.md
 

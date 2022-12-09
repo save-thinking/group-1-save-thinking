@@ -26,6 +26,7 @@
 		"webpack-cli": "^4.10.0"
 	},
 	"dependencies": {
+		"chart.js": "^4.0.1",
 		"dexie": "^3.2.2",
 		"eslint-config-standard": "^17.0.0",
 		"eslint-plugin-jest": "^27.1.4",

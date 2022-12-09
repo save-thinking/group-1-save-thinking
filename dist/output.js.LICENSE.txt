@@ -1,10 +1,30 @@
+/*!
+ * @kurkle/color v0.2.1
+ * https://github.com/kurkle/color#readme
+ * (c) 2022 Jukka Kurkela
+ * Released under the MIT License
+ */
+
+/*!
+ * Chart.js v4.0.1
+ * https://www.chartjs.org
+ * (c) 2022 Chart.js Contributors
+ * Released under the MIT License
+ */
+
 /*! ../domain/account.js */
 
 /*! ../domain/record.js */
 
+/*! ../domain/summary.js */
+
 /*! ../storage/account.js */
 
 /*! ../storage/record.js */
+
+/*! ../utils.js */
+
+/*! ./chunks/helpers.segment.js */
 
 /*! ./components.js */
 
@@ -15,6 +35,8 @@
 /*! ./exceptions.js */
 
 /*! ./idb.js */
+
+/*! ./record.js */
 
 /*! ./storage/account.js */
 
@@ -28,10 +50,16 @@
 
 /*! ./view/records.js */
 
+/*! chart.js */
+
 /*! dexie */
 
 /*!*************************!*\
   !*** ./src/js/index.js ***!
+  \*************************/
+
+/*!*************************!*\
+  !*** ./src/js/utils.js ***!
   \*************************/
 
 /*!*******************************!*\
@@ -59,6 +87,10 @@
   \**********************************/
 
 /*!**********************************!*\
+  !*** ./src/js/domain/summary.js ***!
+  \**********************************/
+
+/*!**********************************!*\
   !*** ./src/js/storage/record.js ***!
   \**********************************/
 
@@ -82,6 +114,14 @@
   !*** ./src/js/storage/exceptions.js ***!
   \**************************************/
 
+/*!*********************************************!*\
+  !*** ./node_modules/chart.js/dist/chart.js ***!
+  \*********************************************/
+
 /*!**************************************************!*\
   !*** ./node_modules/dexie/dist/modern/dexie.mjs ***!
   \**************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/chart.js/dist/chunks/helpers.segment.js ***!
+  \**************************************************************/
