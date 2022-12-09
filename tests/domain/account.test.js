@@ -74,27 +74,3 @@ test("getAllAccounts", async () => {
   expect(result.length).toEqual(0);
   expect(spy).toHaveBeenCalled();
 });
-// TODO - Add rewire package to test internal functions
-// test("validateNewAccount", async () => {
-//   let accountInput = {
-//     name: "",
-//     type: "savings-account",
-//     initial_balance: "3500",
-//     currency: "USD",
-//   };
-//   await expect(validateNewAccount(accountInput)).toThrow(MissingFieldError);
-//   accountInput = {
-//     name: "citi",
-//     type: "savings-account",
-//     initial_balance: "",
-//     currency: "USD",
-//   };
-//   await expect(validateNewAccount(accountInput)).toThrow(MissingFieldError);
-//   accountInput = {
-//     name: 1244,
-//     type: "savings-account",
-//     initial_balance: "42",
-//     currency: "USD",
-//   };
-//   await expect(validateNewAccount(accountInput)).toThrow(FormattingError);
-// });

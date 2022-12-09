@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       addAccountCard(account)
     })
   })
-  populateSummary()
+  donut && populateSummary()
 })
 
 /* Utilities */

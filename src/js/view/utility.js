@@ -10,7 +10,7 @@ export function getBalanceColor (balance) {
 
 // helper function to return currency with balance as string
 export function getBalanceWithCurrency (balance, currency) {
-  const currencySign = getCurrencySign(currency)
+  const currencySign = getCurrencySign(currency.toUpperCase())
   if (balance < 0) {
     return '-' + currencySign + Math.abs(balance).toString()
   } else {

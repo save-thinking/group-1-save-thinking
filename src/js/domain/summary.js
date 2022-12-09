@@ -27,7 +27,7 @@ export async function getLatestRecords () {
   records = records.map((record) =>
     Object.assign({}, record, { created_at: Date.parse(record.created_at) })
   )
-  records.sort((a, b) => (a.created_at > b.created_at ? 1 : -1))
+  records.sort((a, b) => (a.created_at > b.created_at ? -1 : 1))
   records = records.slice(0, 5)
   return records.map((record) =>
     Object.assign({}, record, {
